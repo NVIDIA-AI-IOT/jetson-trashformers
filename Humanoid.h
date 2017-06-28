@@ -1,6 +1,8 @@
 #ifndef SEPERATE_H_
 #define SEPERATE_H_
 
+#include <stdio.h>
+
 class Humanoid {
     public:
         Humanoid();
