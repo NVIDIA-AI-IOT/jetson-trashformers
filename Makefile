@@ -1,15 +1,15 @@
 TARGET		= Humanoid
+LIBDIRS		+= -L./lib
 OBJS		= Humanoid.o
 SRCS		= $(OBJS:.o=.c)
 INCLUDEDIRS	+= -I./include
-LIBDIRS		+= -L./lib
 CFLAGS		= $(INCLUDEDIRS) -W -Wall -O2
-LDFLAGS		= $(LIBDIRS) -lm -lzgb
+LDFLAGS		= $(LIBDIRS) -lzgb
 
 CC			= g++
 
 $(TARGET): $(OBJS)
-	$(CC) -o $@ $^ $(LDFLAGS)
+	$(CC) $(LDFLAGS) -o $@ $^
 	
 .c.o:
 	$(CC) -c $< $(CFLAGS)
