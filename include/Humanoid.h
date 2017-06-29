@@ -1,7 +1,11 @@
-#ifndef SEPERATE_H_
-#define SEPERATE_H_
+#ifndef HUMANOID_H_
+#define HUMANOID_H_
 
 #include <stdio.h>
+#include <iostream>
+
+#include "../util/zigbee.h"
+#include "../util/zgb_hal.h"
 
 class Humanoid {
     public:
@@ -13,6 +17,9 @@ class Humanoid {
 
         void WalkForward();
         void Stop();
+        
+        int ConnectZigbee();
+        void CloseZigbee();
 
     private:
         
