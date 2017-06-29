@@ -4,8 +4,7 @@
 #include <stdio.h>
 #include <iostream>
 
-#include "../util/zigbee.h"
-#include "../util/zgb_hal.h"
+#include "ZigbController.h"
 
 class Humanoid {
     public:
@@ -17,11 +16,8 @@ class Humanoid {
 
         void WalkForward();
         void Stop();
-        
-        int ConnectZigbee();
-        void CloseZigbee();
-
     private:
+        ZigbController* zigb;
         
 };
 

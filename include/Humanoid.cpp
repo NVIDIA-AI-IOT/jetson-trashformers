@@ -3,7 +3,8 @@
 #define DEFAULT_DEVICEINDEX 0
 
 Humanoid::Humanoid() { //CONSTRUCTOR
-
+    ZigbController* zigb = new ZigbController(DEFAULT_DEVICEINDEX);
+    zigb->ConnectZigbee();
 }
 
 Humanoid::~Humanoid() {
@@ -15,30 +16,9 @@ double Humanoid::GetCupCenterY(){
 }
 
 void Humanoid::WalkForward(){
-    if( zgb_tx_data(1) == 0 ) {
-        printf("Failed to transmit\n");
-    } else {
-        printf("Succeeded to transmit\n");
-    }
+    zigb->SendCommand(1);
 }
 
 void Humanoid::Stop(){
-    if( zgb_tx_data(0) == 0) {
-        printf("Failed to transmit\n");
-    } else {
-        printf("Succeeded to transmit\n");
-    }
-}
-
-int Humanoid::ConnectZigbee() {
-    if(zgb_initialize(DEFAULT_DEVICEINDEX) == 0) {
-        printf("Failed to open Zig2Serial!\n");
-        return 0;
-    }
-    return 1;
-}
-
-void Humanoid::CloseZigbee() {
-    printf("Closing\n");
-    zgb_terminate();
+    zigb->Stop();
 }
