@@ -6,11 +6,12 @@
 
 #include "ZigbController.h"
 #include "KeyboardController.h"
+#include "DetectNetController.h"
 #include "Controls.h"
 
 class Humanoid {
     public:
-        Humanoid();
+        Humanoid(int argc, char** argv);
         virtual ~Humanoid();
         
         double GetCupCenterY();
@@ -48,6 +49,7 @@ class Humanoid {
     private:
         ZigbController* zigb;
         KeyboardController* keyboardController;
+        DetectNetController* detectnetController;
         
 };
 

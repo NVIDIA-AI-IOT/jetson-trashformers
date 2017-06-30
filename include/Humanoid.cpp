@@ -2,10 +2,11 @@
 
 #define DEFAULT_DEVICEINDEX 0
 
-Humanoid::Humanoid() { //CONSTRUCTOR
+Humanoid::Humanoid(int argc, char** argv) { //CONSTRUCTOR
     ZigbController* zigb = new ZigbController(DEFAULT_DEVICEINDEX);
     zigb->ConnectZigbee();
 
+    detectnetController = new DetectNetController(argc, argv);
     keyboardController = new KeyboardController(zigb);
 }
 

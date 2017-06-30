@@ -55,7 +55,7 @@ void KeyboardController::RunInput(){
             zigb->SendCommand(BUTTON_SIDESTEP_RIGHT);
         }
         else if(c == 'n'){
-            printf("DIAGONOL_FRPNTAL Left!\n");
+            printf("DIAGONOL FRONTAL Left!\n");
             zigb->SendCommand(BUTTON_DIAGONAL_FRONTAL_LEFT);
         }
         else if(c == 'm'){
@@ -63,11 +63,11 @@ void KeyboardController::RunInput(){
             zigb->SendCommand(BUTTON_DIAGONAL_FRONTAL_RIGHT);
         }
         else if(c == 'u'){
-            printf("DIAGONOL_FRPNTAL Left!\n");
+            printf("Get Up, Facing up!\n");
             zigb->SendCommand(BUTTON_GET_UP_FACING_UP);
         }
         else if(c == 'j'){
-            printf("DIAGONAL FRONTAL Right!\n");
+            printf("Get up, Facing down!\n");
             zigb->SendCommand(BUTTON_GET_UP_FACING_DOWN); 
         }
     }

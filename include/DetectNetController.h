@@ -3,11 +3,11 @@
 
 #include <stdio.h>
 #include <iostream>
-//#include "/home/nvidia/jetson-inference/detectnet-camera/detectnet-camera.h"
+#include "../util/detectnet-camera.h"
 
 class DetectNetController {
     public:
-        DetectNetController();
+        DetectNetController(int argc, char** argv);
         virtual ~DetectNetController();
         
     private:
