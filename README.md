@@ -22,6 +22,6 @@ mv ./libzgb.so ../lib
 ```
 
 ### Add libraries from detectnet-camera / jetson-inference
-See the log.txt file for instructions on how we got that to work. Imporoved instructions are in the works.
+See the log.md file for instructions on how we got that to work. Imporoved instructions are in the works.
 
 
