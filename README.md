@@ -1,6 +1,6 @@
 # jetson-trashformers
 
-Repository for the Trasformers NVIDIA Embedded Intern Team!
+Repository for the Trashformers NVIDIA Embedded Intern Team!
 
 
 ### Add jetson-trashformers/lib to your library path
@@ -17,7 +17,6 @@ g++ -c -fpic *.c
 g++ -shared -o libzgb.so *.o
 ```
 then move the resulting .so file to jetson-trashformers/lib:
-
 ```
 mv ./libzgb.so ../lib
 ```
