@@ -1,10 +1,13 @@
 #include "Humanoid.h"
 
-#define DEFAULT_DEVICEINDEX 0
+#define DEFAULT_ZIGBEE_DEVICEINDEX 0
 
 Humanoid::Humanoid(int argc, char** argv) { //CONSTRUCTOR
-    ZigbController* zigb = new ZigbController(DEFAULT_DEVICEINDEX);
+    ZigbController* zigb = new ZigbController(DEFAULT_ZIGBEE_DEVICEINDEX);
     zigb->ConnectZigbee();
+
+    motor_1 = new Servo(8);
+    //motor_1->SetSetpoint(400);
 
     detectnetController = new DetectNetController(argc, argv);
     keyboardController = new KeyboardController(zigb);

@@ -8,6 +8,7 @@
 #include "KeyboardController.h"
 #include "DetectNetController.h"
 #include "Controls.h"
+#include "Servo.h"
 
 class Humanoid {
     public:
@@ -46,6 +47,7 @@ class Humanoid {
         void GetUpFacingUp();
         void GetUpFacingDown();
 
+        Servo* motor_1;
     private:
         ZigbController* zigb;
         KeyboardController* keyboardController;
