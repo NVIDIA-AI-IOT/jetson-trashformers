@@ -22,6 +22,7 @@ void KeyboardController::Init(){
 
 void KeyboardController::RunInput(){
     while(true){
+        //zigb->Stop();
         c = getchar();
         //printf("%d \n", c);
         
@@ -38,12 +39,36 @@ void KeyboardController::RunInput(){
             zigb->SendCommand(BUTTON_WALK_BACKWARD);
         }
         else if(c == 'a'){
-            printf("Left!\n");
+            printf("Turn Left!\n");
             zigb->SendCommand(BUTTON_TURN_LEFT);
         }
         else if(c == 'd'){
-            printf("Right!\n");
+            printf("Turn Right!\n");
             zigb->SendCommand(BUTTON_TURN_RIGHT);
+        }
+        else if(c == 'q'){
+            printf("Sidestep Left!\n");
+            zigb->SendCommand(BUTTON_SIDESTEP_LEFT); 
+        }
+        else if(c == 'e'){
+            printf("Sidestep Right!\n");
+            zigb->SendCommand(BUTTON_SIDESTEP_RIGHT);
+        }
+        else if(c == 'n'){
+            printf("DIAGONOL_FRPNTAL Left!\n");
+            zigb->SendCommand(BUTTON_DIAGONAL_FRONTAL_LEFT);
+        }
+        else if(c == 'm'){
+            printf("DIAGONAL FRONTAL Right!\n");
+            zigb->SendCommand(BUTTON_DIAGONAL_FRONTAL_RIGHT);
+        }
+        else if(c == 'u'){
+            printf("DIAGONOL_FRPNTAL Left!\n");
+            zigb->SendCommand(BUTTON_GET_UP_FACING_UP);
+        }
+        else if(c == 'j'){
+            printf("DIAGONAL FRONTAL Right!\n");
+            zigb->SendCommand(BUTTON_GET_UP_FACING_DOWN); 
         }
     }
 }
