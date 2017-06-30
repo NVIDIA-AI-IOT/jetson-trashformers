@@ -1,0 +1,3 @@
+Source code available at http://support.robotis.com/en/software/zigbee_sdk/zig2serial/linux.htm
+
+No license was found as of June 29 2017
