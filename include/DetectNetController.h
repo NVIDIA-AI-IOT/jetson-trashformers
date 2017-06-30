@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <iostream>
-#include "/home/nvidia/jetson-inference/detectnet-camera/detectnet-camera.h"
+//#include "/home/nvidia/jetson-inference/detectnet-camera/detectnet-camera.h"
 
 class DetectNetController {
     public:

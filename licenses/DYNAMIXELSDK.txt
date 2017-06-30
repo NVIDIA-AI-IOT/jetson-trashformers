@@ -1,3 +1,6 @@
+SDK OBTAINED FROM https://github.com/ROBOTIS-GIT/DynamixelSDK
+on jun 29 2017
+
 Copyright (c) 2016, ROBOTIS CO., LTD.
 All rights reserved.
 
