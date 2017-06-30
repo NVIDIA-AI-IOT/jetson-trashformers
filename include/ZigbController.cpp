@@ -13,7 +13,7 @@ ZigbController::~ZigbController(){
 
 int ZigbController::SendCommand(int data){
     if(zgb_tx_data(data) == 0) {
-        printf("ZIGB: Failed to transmit command to %d\n", data);
+        printf("ZIGB: Failed to transmit command %d!\n", data);
         return -1;
     } else {
         //printf("ZIGB: Succeeded to transmit to %d\n", data);

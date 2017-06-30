@@ -16,6 +16,8 @@ class Humanoid {
         double GetCupCenterY();
         double GetCupCenterX();
 
+        void UseKeyboard();
+
         //Movement commands through Zigbee
         void Stop();
         

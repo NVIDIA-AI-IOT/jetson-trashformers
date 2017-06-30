@@ -6,20 +6,21 @@ Humanoid::Humanoid() { //CONSTRUCTOR
     ZigbController* zigb = new ZigbController(DEFAULT_DEVICEINDEX);
     zigb->ConnectZigbee();
 
-    KeyboardController* keyController = new KeyboardController(zigb);
-
-    keyController->Init();
-    keyController->RunInput();
+    keyboardController = new KeyboardController(zigb);
 }
 
 Humanoid::~Humanoid() {
 
 }
 
+void Humanoid::UseKeyboard(){
+    keyboardController->Init();
+    keyboardController->RunInput();
+}
+
 void Humanoid::Stop(){
     zigb->Stop();
 }
-
 
 void Humanoid::WalkForward(){
     zigb->SendCommand(BUTTON_WALK_FORWARD);
