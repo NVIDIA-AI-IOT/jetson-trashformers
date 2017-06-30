@@ -27,9 +27,10 @@ int ZigbController::Stop(){
 
 int ZigbController::ConnectZigbee(){
     if(zgb_initialize(m_device_index) == 0){
-        printf("ZIGB: Failed to open Zig2Serial to device index %d!\n", m_device_index);
+        printf("ZIGB: Failed to initialize Zig2Serial to device index %d!\n", m_device_index);
         return -1;
     } else {
+        printf("ZIGB: Successfully initialized Zig2Serial at device index %d\n", m_device_index);
         return 0;
     }
 }

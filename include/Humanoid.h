@@ -5,6 +5,8 @@
 #include <iostream>
 
 #include "ZigbController.h"
+#include "KeyboardController.h"
+#include "Controls.h"
 
 class Humanoid {
     public:
@@ -14,12 +16,37 @@ class Humanoid {
         double GetCupCenterY();
         double GetCupCenterX();
 
-        void WalkForward();
+        //Movement commands through Zigbee
         void Stop();
+        
+        void WalkForward();
+        void WalkBackward();
+
+        void TurnLeft();
+        void TurnRight();
+
+        void WalkForwardLeft();
+        void WalkForwardRight();
+
+        void SidestepLeft();
+        void SidestepRight();
+
+        void FastSidestepLeft();
+        void FastSidestepRight();
+
+        void StepDiagonalFrontalLeft();
+        void StepDiagonalFrontalRight();
+
+        void StepDiagonalDorsalLeft();
+        void StepDiagonalDorsalRight();
+
+        void GetUpFacingUp();
+        void GetUpFacingDown();
+
     private:
         ZigbController* zigb;
+        KeyboardController* keyboardController;
         
 };
 
-#endif
-
+#endif // HUMANOID_H_

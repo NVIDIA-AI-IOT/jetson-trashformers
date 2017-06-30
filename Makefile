@@ -5,7 +5,7 @@ SRCS		= $(OBJS:.o=.cpp)
 INCLUDEDIRS	+= -I./include
 CFLAGS		= -W -Wall -O2
 #CFLAGS		= $(INCLUDEDIRS) -W -Wall -O2
-LDFLAGS		= $(LIBDIRS) -lzgb -ldxl_sbc_cpp 
+LDFLAGS		= $(LIBDIRS) -lpthread -lzgb -ldxl_sbc_cpp 
 
 CC			= g++
 

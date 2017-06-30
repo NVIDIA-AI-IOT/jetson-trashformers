@@ -14,4 +14,4 @@ then move the resulting .so file to the lib
 
 
 You also may need to export lib to your library path:
-    LD_LIBRARY_PATH=lib:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=lib:$LD_LIBRARY_PATH
