@@ -13,3 +13,6 @@ I successfully got detectnet-camera working. I did the following:
 next, we need to include the cuda library files (/usr/local/cuda/lib64) to our makefile:
 1) LIBDIRS     += -Llib -L/usr/local/cuda/lib64
 2) LDFLAGS     = $(LIBDIRS) -ldetectnet-camera -ljetson-inference -lcudart -lzgb -ldxl_sbc_cpp
+
+Finally, run ./main with the flags you would have given detectnet:
+ ./main --prototxt=$NET/deploy.prototxt --model=$NET/snapshot_iter_1240.caffemodel --input_blob=data --output_cvg=coverage --output_bbox=bboxes
