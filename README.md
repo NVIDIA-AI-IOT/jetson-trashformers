@@ -18,7 +18,8 @@ g++ -shared -o libzgb.so *.o
 ```
 then move the resulting .so file to jetson-trashformers/lib:
 
-```mv ./libzgb.so ../lib
+```
+mv ./libzgb.so ../lib
 ```
 
 ### Add libraries from detectnet-camera / jetson-inference
