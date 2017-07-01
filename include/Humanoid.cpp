@@ -6,8 +6,7 @@ Humanoid::Humanoid(int argc, char** argv) { //CONSTRUCTOR
     ZigbController* zigb = new ZigbController(DEFAULT_ZIGBEE_DEVICEINDEX);
     zigb->ConnectZigbee();
 
-    motor_1 = new Servo(8);
-    //motor_1->SetSetpoint(400);
+    arm = new Arm();
 
     detectnetController = new DetectNetController(argc, argv);
     keyboardController = new KeyboardController(zigb);
