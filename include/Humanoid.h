@@ -8,6 +8,7 @@
 #include "KeyboardController.h"
 #include "DetectNetController.h"
 #include "Controls.h"
+#include "Arm.h"
 #include "Servo.h"
 #include "SerialHandler.h"
 
