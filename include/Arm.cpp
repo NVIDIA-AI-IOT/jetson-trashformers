@@ -1,9 +1,9 @@
 #include "Arm.h"
 
-#define SHOULDER_ID 0
-#define    BICEP_ID 1
-#define    ELBOW_ID 2
-#define     CLAW_ID 3 
+#define SHOULDER_ID 1
+#define    BICEP_ID 3
+#define    ELBOW_ID 5
+#define     CLAW_ID 7 
 
 Arm::Arm(){
     shoulder = new Servo(SHOULDER_ID);
