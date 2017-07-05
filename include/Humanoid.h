@@ -9,6 +9,7 @@
 #include "DetectNetController.h"
 #include "Controls.h"
 #include "Servo.h"
+#include "SerialHandler.h"
 
 class Humanoid {
     public:
@@ -48,11 +49,11 @@ class Humanoid {
         void GetUpFacingDown();
 
         Servo* motor_1;
+        SerialHandler* serialHandler;
     private:
         ZigbController* zigb;
         KeyboardController* keyboardController;
         DetectNetController* detectnetController;
-        
 };
 
 #endif // HUMANOID_H_

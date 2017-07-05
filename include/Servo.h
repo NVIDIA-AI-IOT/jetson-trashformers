@@ -17,8 +17,8 @@
 #define DEVICENAME_DEFAULT "/dev/ttyUSB0"
 class Servo {
 	public:				
-		Servo(int dxl_id);
-		Servo(int dxl_id, std::string* devicename);
+		Servo(int dxl_id, dynamixel::PortHandler* portHandler);
+		Servo(int dxl_id, std::string* devicename, dynamixel::PortHandler* portHandler);
 		virtual ~Servo();
 
 		int Enable(bool enable);
@@ -33,7 +33,7 @@ class Servo {
         uint8_t dxl_error = 0;
         uint16_t dxl_present_position;
 
-        dynamixel::PortHandler* portHandler;
+        dynamixel::PortHandler* m_portHandler;
 		dynamixel::PacketHandler* packetHandler;
 
         bool CheckError();
