@@ -20,6 +20,8 @@ class Humanoid {
         double GetCupCenterX();
 
         void UseKeyboard();
+        
+        void InitServo();
 
         //Movement commands through Zigbee
         void Stop();
@@ -49,11 +51,12 @@ class Humanoid {
         void GetUpFacingDown();
 
         Servo* motor_1;
-    private:
         ZigbController* zigb;
+    private:
         KeyboardController* keyboardController;
         DetectNetController* detectnetController;
-        
+        Arm* arm;        
+
 };
 
 #endif // HUMANOID_H_

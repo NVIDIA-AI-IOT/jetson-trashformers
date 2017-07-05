@@ -6,17 +6,19 @@ Servo::Servo(int dxl_id) {
 	portHandler = dynamixel::PortHandler::getPortHandler(DEVICENAME_DEFAULT);
 	packetHandler = dynamixel::PacketHandler::getPacketHandler(PROTOCOL_VERSION);
 
+
 	if(portHandler->openPort()) {
 		printf("Opened port to%d \n", dxl_id);
 	} else {
 		printf("Failed to open port to%d \n", dxl_id);
 	}
-
 	if(portHandler->setBaudRate(BAUDRATE)) {
 		printf("Changed baudrate of%d ", dxl_id);
 	} else {
 		printf("Failed to change baudrate of%d ", dxl_id);
 	}
+
+
 }
 
 Servo::~Servo() {
