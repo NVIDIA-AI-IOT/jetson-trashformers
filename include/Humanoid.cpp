@@ -8,7 +8,7 @@ Humanoid::Humanoid(int argc, char** argv) { //CONSTRUCTOR
     zigb = serialHandler->GetZigbController();
     motor_1 = new Servo(1, serialHandler->GetDynamixelPortHandler());
     //motor_1->SetSetpoint(400);
-    arm = new Arm();
+    arm = new Arm(serialHandler->GetDynamixelPortHandler());
 
     detectnetController = new DetectNetController(argc, argv);
     keyboardController = new KeyboardController(zigb);

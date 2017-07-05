@@ -51,6 +51,7 @@ class Humanoid {
 
         Servo* motor_1;
         SerialHandler* serialHandler;
+        Arm* arm;
     private:
         ZigbController* zigb;
         KeyboardController* keyboardController;
