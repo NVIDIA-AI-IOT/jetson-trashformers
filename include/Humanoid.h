@@ -10,6 +10,7 @@
 #include "Controls.h"
 #include "Arm.h"
 #include "Servo.h"
+#include "SerialHandler.h"
 
 class Humanoid {
     public:
@@ -21,8 +22,6 @@ class Humanoid {
 
         void UseKeyboard();
         
-        void InitServo();
-
         //Movement commands through Zigbee
         void Stop();
         
@@ -51,11 +50,12 @@ class Humanoid {
         void GetUpFacingDown();
 
         Servo* motor_1;
-        ZigbController* zigb;
+        SerialHandler* serialHandler;
+        Arm* arm;
     private:
+        ZigbController* zigb;
         KeyboardController* keyboardController;
         DetectNetController* detectnetController;
-        Arm* arm;        
 
 };
 
