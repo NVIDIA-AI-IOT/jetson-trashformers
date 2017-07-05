@@ -14,7 +14,12 @@ class DetectNetController {
         int m_argc;
         char** m_argv;
         void runThread();
-        std::thread detectNetThread;
+        void JoinDetect();
+        std::thread* detectNetThread;
+
+        float** GetBBArray();
+        int GetNumBB();
+        
     private:
         float *boxes;
         

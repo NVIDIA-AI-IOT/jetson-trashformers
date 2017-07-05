@@ -52,10 +52,10 @@ class Humanoid {
         Servo* motor_1;
         SerialHandler* serialHandler;
         Arm* arm;
+        DetectNetController* detectnetController;
     private:
         ZigbController* zigb;
         KeyboardController* keyboardController;
-        DetectNetController* detectnetController;
 
 };
 

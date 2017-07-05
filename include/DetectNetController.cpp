@@ -5,16 +5,7 @@ DetectNetController::DetectNetController(int argc, char** argv){
     m_argc = argc;
     m_argv = argv;
     
-    std::thread detectNetThread(&DetectNetController::runThread, this);
-    
-    printf("CUSTOM\n");
-    printf("CUSTOM\n");
-    printf("CUSTOM\n");
-    printf("CUSTOM\n");
-    printf("CUSTOM\n");
-    printf("CUSTOM\n");
-    printf("CUSTOM\n");
-    detectNetThread.join();
+    detectNetThread = new std::thread(&DetectNetController::runThread, this);
     
 }
 
@@ -25,4 +16,16 @@ DetectNetController::~DetectNetController(){
 //THREAD FUNCTION
 void DetectNetController::runThread(){
     runDetectNet(m_argc, m_argv);
+}
+
+void DetectNetController::JoinDetect(){
+    detectNetThread->join();
+}
+
+float** DetectNetController::GetBBArray(){
+    return getBoundingBoxArray();
+}
+
+int DetectNetController::GetNumBB(){
+    return getNumBoundingBox();
 }
