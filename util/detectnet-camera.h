@@ -5,7 +5,12 @@ void sig_handler(int signo);
 int main( int argc, char** argv );
 int runDetectNet(int argc, char** argv);
 float** getBoundingBoxArray();
-volatile int* getNumBoundingBox();
+int* getNumBoundingBox();
+
+unsigned int getCameraHeight();
+unsigned int getCameraWidth();
+bool isCameraLoaded();
+
 
 
 
