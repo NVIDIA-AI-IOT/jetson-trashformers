@@ -1,16 +1,10 @@
 #include "include/Humanoid.h"
 #include <iostream>
-#include <signal.h>
 #include <math.h>
 #include <algorithm>
 #include <functional>
 #include <array>
 
-sig_atomic_t signaled = 0;
-
-void handler(int signum) {
-    signaled = 1;
-}
 
 float hypotenuse(float x1, float y1, float x2, float y2) {
     return sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
@@ -20,10 +14,8 @@ float hypotenuse(float x1, float y1, float x2, float y2) {
 int main (int argc, char** argv){
     Humanoid* humanoid = new Humanoid(argc, argv);
     
-    signal(SIGINT, handler);
     float** bbArray;
     volatile int numBB;
-    std::cin.ignore();
     char ch;
 
     float camCenterX;
@@ -36,7 +28,8 @@ int main (int argc, char** argv){
     } customLess;
       */   
  
-    while((ch = std::cin.get()) != 27){
+    int c; 
+    while((c = getchar()) != 27){
         bbArray = humanoid->detectnetController->GetBBArray();
         numBB = *humanoid->detectnetController->GetNumBB();
         std::array<float*, numBB> bbArraySorted = bbArray;
@@ -65,9 +58,9 @@ int main (int argc, char** argv){
 
         //std::cin.ignore();
     }
-   
+     
 
-    humanoid->detectnetController->JoinDetect();
+//    humanoid->detectnetController->JoinDetect();
     std::cout << "exiting.." << std::endl;
 
     return 0;

@@ -27,6 +27,9 @@ float* bb = NULL;
 float** boxes = NULL;
 int numBoundingBoxes = 0;
 int actualNumBB = 0;
+unsigned int cameraHeight = 0;
+unsigned int cameraWidth = 0;
+bool cameraIsLoaded = false;
 
 void sig_handler(int signo)
 {
@@ -42,8 +45,20 @@ float** getBoundingBoxArray(){
     return boxes;
 }
 
-volatile int *getNumBoundingBox(){
+int *getNumBoundingBox(){
     return &actualNumBB;
+}
+
+bool isCameraLoaded(){
+    return cameraIsLoaded;
+}
+
+unsigned int getCameraHeight(){
+    return cameraHeight;
+}
+
+unsigned int getCameraWidth(){
+    return cameraWidth;
 }
 
 int main(int argc, char** argv){
@@ -91,6 +106,11 @@ int runDetectNet( int argc, char** argv )
 		return 0;
 	}
 	
+    //ADDED CAMERA FOR FUNCTIONS --MICHAEL
+    cameraIsLoaded = true;
+    cameraWidth = camera->GetWidth();
+    cameraHeight = camera->GetHeight();
+
 	printf("\ndetectnet-camera:  successfully initialized video device\n");
 	printf("    width:  %u\n", camera->GetWidth());
 	printf("   height:  %u\n", camera->GetHeight());
