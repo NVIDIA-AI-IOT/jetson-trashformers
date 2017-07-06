@@ -6,8 +6,8 @@ int main (int argc, char** argv){
     
     float** bbArray;
     volatile int numBB;
-    std::cin.ignore(); 
-    while(true){
+    int c; 
+    while((c = getchar()) != 27){
         bbArray = humanoid->detectnetController->GetBBArray();
         numBB = *humanoid->detectnetController->GetNumBB();
         printf("numBB %i\n:", numBB);
@@ -17,11 +17,10 @@ int main (int argc, char** argv){
                 printf("BB %i: %f, %f, %f, %f\n", i, bb[0], bb[1], bb[2], bb[3]);
             }
         }
-        std::cin.ignore();
     }
-   
+     
 
-    humanoid->detectnetController->JoinDetect();
+//    humanoid->detectnetController->JoinDetect();
     std::cout << "exiting.." << std::endl;
 
     return 0;
