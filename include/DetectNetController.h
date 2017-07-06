@@ -19,6 +19,9 @@ class DetectNetController {
 
         float** GetBBArray();
         volatile int* GetNumBB();
+        unsigned int GetCamWidth();
+        unsigned int GetCamHeight();
+        bool IsCameraLoaded();
         
     private:
         float *boxes;

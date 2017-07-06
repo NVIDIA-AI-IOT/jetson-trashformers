@@ -29,3 +29,15 @@ float** DetectNetController::GetBBArray(){
 volatile int* DetectNetController::GetNumBB(){
     return getNumBoundingBox();
 }
+
+unsigned int DetectNetController::GetCamWidth(){
+    return getCameraWidth();
+}
+
+unsigned int DetectNetController::GetCamHeight(){
+    return getCameraHeight();
+}
+
+bool DetectNetController::IsCameraLoaded(){
+    return isCameraLoaded();
+}
