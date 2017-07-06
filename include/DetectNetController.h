@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <thread>
+#include <stdint.h>
 #include "../util/detectnet-camera.h"
 
 class DetectNetController {
@@ -22,9 +23,8 @@ class DetectNetController {
 
         float GetCenterX(float* bbArray);
         float GetCenterY(float* bbArray);
-
-        unsigned int GetCamWidth();
-        unsigned int GetCamHeight();
+        uint32_t GetCamWidth();
+        uint32_t GetCamHeight();
         bool IsCameraLoaded();
         
     private:

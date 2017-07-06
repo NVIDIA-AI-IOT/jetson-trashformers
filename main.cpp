@@ -23,11 +23,12 @@ int main (int argc, char** argv){
 
     }
 
-    unsigned int camHeight = humanoid->detectnetController->GetCamHeight();
-    unsigned int camWidth = humanoid->detectnetController->GetCamWidth();
+    float camCenterX = (float)(humanoid->detectnetController->GetCamWidth()) / 2.0;
+    float camCenterY = (float)(humanoid->detectnetController->GetCamHeight()) / 2.0;
 
-    float camCenterX = (float)(camWidth) / 2.0;
-    float camCenterY = (float)(camHeight) / 2.0;
+    std::cin.ignore();
+    std::cout << "CAM_CENTER_X" << camCenterX << std::endl;
+    std::cout << "CAM_CENTER_Y" << camCenterY << std::endl;
 
     /*struct {
         

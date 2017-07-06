@@ -38,15 +38,14 @@ float DetectNetController::GetCenterY(float* bbArray) {
     return (bbArray[1] + bbArray[3]) / 2.0;
 }
 
-
-unsigned int DetectNetController::GetCamWidth() {
+uint32_t DetectNetController::GetCamWidth(){
     return getCameraWidth();
 }
 
-unsigned int DetectNetController::GetCamHeight() {
+uint32_t DetectNetController::GetCamHeight(){
     return getCameraHeight();
 }
 
-bool DetectNetController::IsCameraLoaded() {
+bool DetectNetController::IsCameraLoaded(){
     return isCameraLoaded();
 }

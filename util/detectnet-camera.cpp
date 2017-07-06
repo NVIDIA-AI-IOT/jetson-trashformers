@@ -19,7 +19,7 @@
 #include "detectNet.h"
 
 
-#define DEFAULT_CAMERA -1 // -1 for onboard camera, or change to index of /dev/video V4L2 camera (>=0)	
+#define DEFAULT_CAMERA 2  // -1 for onboard camera, or change to index of /dev/video V4L2 camera (>=0)	
 
 		
 bool signal_recieved = false;
@@ -27,8 +27,8 @@ float* bb = NULL;
 float** boxes = NULL;
 int numBoundingBoxes = 0;
 int actualNumBB = 0;
-unsigned int cameraHeight = 0;
-unsigned int cameraWidth = 0;
+uint32_t camera_Height = 0;
+uint32_t camera_Width = 0;
 bool cameraIsLoaded = false;
 
 void sig_handler(int signo)
@@ -53,12 +53,12 @@ bool isCameraLoaded(){
     return cameraIsLoaded;
 }
 
-unsigned int getCameraHeight(){
-    return cameraHeight;
+uint32_t getCameraHeight(){
+    return camera_Height;
 }
 
-unsigned int getCameraWidth(){
-    return cameraWidth;
+uint32_t getCameraWidth(){
+    return camera_Width;
 }
 
 int main(int argc, char** argv){
@@ -106,10 +106,6 @@ int runDetectNet( int argc, char** argv )
 		return 0;
 	}
 	
-    //ADDED CAMERA FOR FUNCTIONS --MICHAEL
-    cameraIsLoaded = true;
-    cameraWidth = camera->GetWidth();
-    cameraHeight = camera->GetHeight();
 
 	printf("\ndetectnet-camera:  successfully initialized video device\n");
 	printf("    width:  %u\n", camera->GetWidth());
@@ -183,6 +179,10 @@ int runDetectNet( int argc, char** argv )
 	
 	printf("\ndetectnet-camera:  camera open for streaming\n");
 	
+    //ADDED CAMERA FOR FUNCTIONS --MICHAEL
+    cameraIsLoaded = true;
+    camera_Width = camera->GetWidth();
+    camera_Height = camera->GetHeight();
 	
 	/*
 	 * processing loop
