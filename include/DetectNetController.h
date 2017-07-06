@@ -19,6 +19,9 @@ class DetectNetController {
 
         float** GetBBArray();
         volatile int* GetNumBB();
+
+        float GetCenterX(float* bbArray);
+        float GetCenterY(float* bbArray);
         
     private:
         float *boxes;

@@ -29,3 +29,11 @@ float** DetectNetController::GetBBArray(){
 volatile int* DetectNetController::GetNumBB(){
     return getNumBoundingBox();
 }
+
+float DetectNetController::GetCenterX(float* bbArray) {
+    return (bbArray[0] + bbArray[2]) / 2.0;
+}
+
+float DetectNetController::GetCenterY(float* bbArray) {
+    return (bbArray[1] + bbArray[3]) / 2.0;
+}
