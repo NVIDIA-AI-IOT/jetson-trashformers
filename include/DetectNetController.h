@@ -26,6 +26,7 @@ class DetectNetController {
         uint32_t GetCamWidth();
         uint32_t GetCamHeight();
         bool IsCameraLoaded();
+        void SetCamPort(int source);
         
     private:
         float *boxes;

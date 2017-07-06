@@ -5,6 +5,7 @@ DetectNetController::DetectNetController(int argc, char** argv){
     m_argc = argc;
     m_argv = argv;
     
+    SetCamPort(-1);
     detectNetThread = new std::thread(&DetectNetController::runThread, this);
     
 }
@@ -48,4 +49,8 @@ uint32_t DetectNetController::GetCamHeight(){
 
 bool DetectNetController::IsCameraLoaded(){
     return isCameraLoaded();
+}
+
+void DetectNetController::SetCamPort(int source){
+    setCameraPort(source);
 }

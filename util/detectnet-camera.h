@@ -12,6 +12,7 @@ int* getNumBoundingBox();
 uint32_t getCameraHeight();
 uint32_t getCameraWidth();
 bool isCameraLoaded();
+void setCameraPort(int source);
 
 
 

@@ -18,8 +18,7 @@
 
 #include "detectNet.h"
 
-
-#define DEFAULT_CAMERA 2  // -1 for onboard camera, or change to index of /dev/video V4L2 camera (>=0)	
+//#define DEFAULT_CAMERA 2  // -1 for onboard camera, or change to index of /dev/video V4L2 camera (>=0)	
 
 		
 bool signal_recieved = false;
@@ -30,6 +29,7 @@ int actualNumBB = 0;
 uint32_t camera_Height = 0;
 uint32_t camera_Width = 0;
 bool cameraIsLoaded = false;
+int camera_source = -1;
 
 void sig_handler(int signo)
 {
@@ -38,6 +38,10 @@ void sig_handler(int signo)
 		printf("received SIGINT\n");
 		signal_recieved = true;
 	}
+}
+
+void setCameraPort(int source){
+    camera_source = source;
 }
 
 
@@ -98,7 +102,7 @@ int runDetectNet( int argc, char** argv )
 	/*
 	 * create the camera device
 	 */
-	gstCamera* camera = gstCamera::Create(DEFAULT_CAMERA);
+	gstCamera* camera = gstCamera::Create(camera_source);
 	
 	if( !camera )
 	{
