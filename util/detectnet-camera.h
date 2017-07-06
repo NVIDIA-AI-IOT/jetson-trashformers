@@ -5,7 +5,7 @@ void sig_handler(int signo);
 int main( int argc, char** argv );
 int runDetectNet(int argc, char** argv);
 float** getBoundingBoxArray();
-int getNumBoundingBox();
+volatile int* getNumBoundingBox();
 
 
 

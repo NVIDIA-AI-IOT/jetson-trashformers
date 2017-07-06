@@ -18,7 +18,7 @@ class DetectNetController {
         std::thread* detectNetThread;
 
         float** GetBBArray();
-        int GetNumBB();
+        volatile int* GetNumBB();
         
     private:
         float *boxes;

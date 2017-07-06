@@ -26,6 +26,6 @@ float** DetectNetController::GetBBArray(){
     return getBoundingBoxArray();
 }
 
-int DetectNetController::GetNumBB(){
+volatile int* DetectNetController::GetNumBB(){
     return getNumBoundingBox();
 }
