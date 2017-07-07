@@ -100,6 +100,22 @@ float DetectNetController::GetCenterY(float* bbArray) {
     else return -1;
 }
 
+float DetectNetController::GetErrorX() {
+   float cX = GetCenterX(GetTargetBB());
+   if(cX == -1) return NULL;
+   return cX - camCenterX; 
+}
+
+float DetectNetController::GetErrorY() {
+   float cY = GetCenterY(GetTargetBB());
+   if(cY == -1) return NULL;
+   return cY - camCenterY; 
+}
+
+float DetectNetController::GetHypotenuse() {
+   return -1; //michael change this later 
+}
+
 uint32_t DetectNetController::GetCamWidth(){
     return getCameraWidth();
 }

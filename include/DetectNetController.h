@@ -24,6 +24,9 @@ class DetectNetController {
 
         float GetCenterX(float* bbArray);
         float GetCenterY(float* bbArray);
+        float GetErrorX();
+        float GetErrorY();
+        float GetHypotenuse();
         uint32_t GetCamWidth();
         uint32_t GetCamHeight();
         bool IsCameraLoaded();

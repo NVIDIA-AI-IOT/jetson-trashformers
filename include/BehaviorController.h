@@ -13,7 +13,11 @@ class BehaviorController {
             WALK_FORWARD,
             WALK_BACKWARD,
             TURN_RIGHT,
-            TURN_LEFT
+            TURN_LEFT,
+            STRAFE_LEFT,
+            STRAFE_RIGHT,
+            STOP
+            
         };
 
 
