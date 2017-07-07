@@ -3,12 +3,13 @@
 #define DEFAULT_ZIGBEE_DEVICEINDEX 0
 
 Humanoid::Humanoid(int argc, char** argv) { //CONSTRUCTOR
-    ZigbController* zigb = new ZigbController(DEFAULT_ZIGBEE_DEVICEINDEX);
-    zigb->ConnectZigbee();
 
-    motor_1 = new Servo(8);
-    //motor_1->SetSetpoint(400);
-
+    serialHandler = new SerialHandler();
+    zigb = serialHandler->GetZigbController();
+    //motor_1 = new Servo(1, serialHandler->GetDynamixelPortHandler());
+    behaviorController = new BehaviorController(serialHandler);    
+    arm = new Arm(serialHandler);
+    head = new Head(serialHandler);
     detectnetController = new DetectNetController(argc, argv);
     keyboardController = new KeyboardController(zigb);
 }

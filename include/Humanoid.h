@@ -8,7 +8,11 @@
 #include "KeyboardController.h"
 #include "DetectNetController.h"
 #include "Controls.h"
+#include "Arm.h"
 #include "Servo.h"
+#include "SerialHandler.h"
+#include "Head.h"
+#include "BehaviorController.h"
 
 class Humanoid {
     public:
@@ -19,7 +23,7 @@ class Humanoid {
         double GetCupCenterX();
 
         void UseKeyboard();
-
+        
         //Movement commands through Zigbee
         void Stop();
         
@@ -48,11 +52,14 @@ class Humanoid {
         void GetUpFacingDown();
 
         Servo* motor_1;
+        SerialHandler* serialHandler;
+        Arm* arm;
+        Head* head;
+        DetectNetController* detectnetController;
+        BehaviorController* behaviorController; 
     private:
         ZigbController* zigb;
         KeyboardController* keyboardController;
-        DetectNetController* detectnetController;
-        
 };
 
 #endif // HUMANOID_H_

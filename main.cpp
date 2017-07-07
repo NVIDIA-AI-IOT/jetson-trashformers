@@ -2,20 +2,23 @@
 #include <iostream>
 
 int main (int argc, char** argv){
-    Humanoid* humanoid;
-    humanoid = new Humanoid(argc, argv);
-    
-    //Control Humanoid with keyboard
-    //humanoid->UseKeyboard();
+    Humanoid* humanoid = new Humanoid(argc, argv);
 
-    std::cout << std::endl << std::endl;
+    int c; 
+   
+    //while camera is not loaded, do nothing
+    while(!humanoid->detectnetController->IsCameraLoaded()) {
 
-    //Move a servo    
-    int input;
-    std::cout << "Enter a setpoint for the servo (0 - 1023):" << std::endl;
-    std::cin >> input;
-    humanoid->motor_1->SetSetpoint(input);
-    
+    }
+
+    humanoid->detectnetController->Init();
+
+    while((c = getchar()) != 27){
+        humanoid->detectnetController->GetTargetBB();
+    }
+
+    //humanoid->detectnetController->JoinDetectThread();
     std::cout << "exiting.." << std::endl;
+
     return 0;
 }

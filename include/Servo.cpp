@@ -1,33 +1,20 @@
 #include "Servo.h"
 
-Servo::Servo(int dxl_id) {
+Servo::Servo(int dxl_id, dynamixel::PortHandler* portHandler) {
 	m_dxl_id = dxl_id;
 	//m_devicename = "/dev/ttyUSB0";
-	portHandler = dynamixel::PortHandler::getPortHandler(DEVICENAME_DEFAULT);
+    m_portHandler = portHandler;
 	packetHandler = dynamixel::PacketHandler::getPacketHandler(PROTOCOL_VERSION);
-
-	if(portHandler->openPort()) {
-		printf("Opened port to%d \n", dxl_id);
-	} else {
-		printf("Failed to open port to%d \n", dxl_id);
-	}
-
-	if(portHandler->setBaudRate(BAUDRATE)) {
-		printf("Changed baudrate of%d ", dxl_id);
-	} else {
-		printf("Failed to change baudrate of%d ", dxl_id);
-	}
 }
 
 Servo::~Servo() {
-    Enable(false);
-    portHandler->closePort();
+    Enable(false); 
 }
 
 int Servo::Enable(bool enable) {
     int torque = enable ? 1 : 0;
 
-    dxl_comm_result = packetHandler->write1ByteTxRx(portHandler, m_dxl_id, ADDR_MX_TORQUE_ENABLE, torque, &dxl_error); 
+    dxl_comm_result = packetHandler->write1ByteTxRx(m_portHandler, m_dxl_id, ADDR_MX_TORQUE_ENABLE, torque, &dxl_error); 
     
     if( CheckError() ) {
         return -1;
@@ -37,7 +24,7 @@ int Servo::Enable(bool enable) {
 }
 
 int Servo::SetSetpoint(uint16_t setpoint) {
-    dxl_comm_result = packetHandler->write2ByteTxRx(portHandler, m_dxl_id, ADDR_MX_GOAL_POSITION, setpoint, &dxl_error);
+    dxl_comm_result = packetHandler->write2ByteTxRx(m_portHandler, m_dxl_id, ADDR_MX_GOAL_POSITION, setpoint, &dxl_error);
     
    if( CheckError() ) {
         return -1;
@@ -48,7 +35,7 @@ int Servo::SetSetpoint(uint16_t setpoint) {
 
 int Servo::GetPosition() {
 
-    dxl_comm_result = packetHandler->read2ByteTxRx(portHandler, m_dxl_id, ADDR_MX_PRESENT_POSITION, &dxl_present_position, &dxl_error);
+    dxl_comm_result = packetHandler->read2ByteTxRx(m_portHandler, m_dxl_id, ADDR_MX_PRESENT_POSITION, &dxl_present_position, &dxl_error);
     
     if( CheckError() ) {
         return -1;
