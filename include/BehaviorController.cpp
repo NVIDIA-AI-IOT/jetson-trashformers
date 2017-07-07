@@ -13,6 +13,7 @@ void BehaviorController::ChangeState(ControllerState state) {
     m_serialHandler->OpenZigbPort(); 
     switch(state) {
         default: 
+        case ControllerState::STOP:
             m_zigb->SendCommand(0);
             break;
         case ControllerState::WALK_FORWARD:
@@ -26,6 +27,12 @@ void BehaviorController::ChangeState(ControllerState state) {
             break;    
         case ControllerState::TURN_LEFT:
             m_zigb->SendCommand(BUTTON_TURN_LEFT);
+            break;
+        case ControllerState::STRAFE_LEFT:
+            m_zigb->SendCommand(BUTTON_SIDESTEP_LEFT);
+            break;
+        case ControllerState::STRAFE_RIGHT:
+            m_zigb->SendCommand(BUTTON_SIDESTEP_RIGHT);
             break;
     }
 }
