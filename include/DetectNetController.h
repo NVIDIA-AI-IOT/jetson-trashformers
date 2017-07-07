@@ -5,6 +5,11 @@
 #include <iostream>
 #include <thread>
 #include <stdint.h>
+#include <math.h>
+#include <algorithm>
+#include <functional>
+#include <array>
+#include <vector>
 #include "../util/detectnet-camera.h"
 
 class DetectNetController {
@@ -12,11 +17,7 @@ class DetectNetController {
         DetectNetController(int argc, char** argv);
         virtual ~DetectNetController();
         
-        int m_argc;
-        char** m_argv;
-        void runThread();
-        void JoinDetect();
-        std::thread* detectNetThread;
+        void JoinDetectThread();
 
         float** GetBBArray();
         volatile int* GetNumBB();
@@ -27,10 +28,25 @@ class DetectNetController {
         uint32_t GetCamHeight();
         bool IsCameraLoaded();
         void SetCamPort(int source);
+
+        void Init();
+        void Loop();
+
+        float camCenterX;
+        float camCenterY;
+        float hypotenuse(float x1, float y1, float x2, float y2);
         
     private:
-        float *boxes;
-        
+        float** bbArray;
+        std::vector<float*> bbArraySorted;
+        volatile int numBB;
+
+
+        //float *boxes;
+        void runThread();
+        int m_argc;
+        char** m_argv;
+        std::thread* detectNetThread;
 };
 
 #endif
