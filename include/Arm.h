@@ -5,6 +5,7 @@
 #include <iostream>
 #include "Servo.h"
 #include "dynamixel_sdk.h"
+#include "SerialHandler.h"
 
 #define SHOULDER_MAX 800
 #define SHOULDER_MIN 350
@@ -20,7 +21,7 @@
 
 class Arm {     
     public:
-        Arm(dynamixel::PortHandler* portHandler);
+        Arm(SerialHandler* serialHandler);
         virtual ~Arm();
 
         void Set(int pos_shoulder, int pos_elbow, int pos_wrist, int pos_claw);
@@ -33,6 +34,7 @@ class Arm {
         void SetDefaultPose();
        
     private:
+        SerialHandler* m_serialHandler;
         Servo *shoulder, *bicep, *elbow, *claw;
         int pos_shoulder, pos_bicep, pos_elbow, pos_claw;
         int pose_default[4] = {330, 590, 700, 610};       

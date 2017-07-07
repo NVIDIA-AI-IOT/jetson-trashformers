@@ -11,6 +11,8 @@
 #include "Arm.h"
 #include "Servo.h"
 #include "SerialHandler.h"
+#include "Head.h"
+#include "BehaviorController.h"
 
 class Humanoid {
     public:
@@ -52,11 +54,12 @@ class Humanoid {
         Servo* motor_1;
         SerialHandler* serialHandler;
         Arm* arm;
+        Head* head;
         DetectNetController* detectnetController;
+        BehaviorController* behaviorController; 
     private:
         ZigbController* zigb;
         KeyboardController* keyboardController;
-
 };
 
 #endif // HUMANOID_H_

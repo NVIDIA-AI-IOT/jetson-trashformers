@@ -14,6 +14,12 @@ float hypotenuse(float x1, float y1, float x2, float y2) {
 int main (int argc, char** argv){
     Humanoid* humanoid = new Humanoid(argc, argv);
     
+   // humanoid->serialHandler->OpenZigbPort();
+   // humanoid->Stop();
+   // humanoid->WalkForward();
+    
+   // humanoid->behaviorController->ChangeState(humanoid->behaviorController->ControllerState::WALK_FORWARD);
+    /*        
     float** bbArray;
     std::vector<float*> bbArraySorted;
     volatile int numBB;
@@ -36,7 +42,7 @@ int main (int argc, char** argv){
         }
     } customLess;
       */   
- 
+    /*
     int c; 
     while((c = getchar()) != 27){
         bbArraySorted.clear();
@@ -75,7 +81,7 @@ int main (int argc, char** argv){
         std::cout << "\n";
 
         //std::cin.ignore();
-    }
+    }*/
      
 
 //    humanoid->detectnetController->JoinDetect();
