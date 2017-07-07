@@ -14,7 +14,7 @@ int main (int argc, char** argv){
 
     humanoid->detectnetController->Init();
 
-    int tolerance = 0.05 * humanoid->detectnetController->GetCamWidth();
+    int tolerance = 0.10 * humanoid->detectnetController->GetCamWidth();
     printf("TOLERANCE %i\n", tolerance);
     while((c = getchar()) != 27){
         //humanoid->detectnetController->GetTargetBB();
