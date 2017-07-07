@@ -30,31 +30,33 @@ void DetectNetController::Init(){
     std::cout << "CAM_CENTER_Y" << camCenterY << std::endl;
 }
 
-void DetectNetController::Loop(){ 
+std::vector<float*> DetectNetController::GetSortedBBArray(){ 
         bbArraySorted.clear();
         bbArray = GetBBArray();
         numBB = *GetNumBB();
         //bbArraySorted = bbArray;
         //std::array<float*, numBB> bbArraySorted = bbArray;
-        printf("numBB %i\n:", numBB);
-        for(int i=0; i< numBB; i++){
+        printf("numBB %i:\n", numBB);
+        for(int i=0; i<numBB; i++){
             float* bb = bbArray[i];
             bbArraySorted.push_back(bb);
             printf("BB %i: %f, %f, %f, %f\n", i, bb[0], bb[1], bb[2], bb[3]);
         }
 
-        std::sort(bbArraySorted.begin(), bbArraySorted.end(), [this](float* a, float* b) {
-            float centerX1 = this->GetCenterX(a);
-            float centerX2 = this->GetCenterX(b);
-            
-            float centerY1 = this->GetCenterY(a);
-            float centerY2 = this->GetCenterY(b);
+        if(numBB != 0){
+            std::sort(bbArraySorted.begin(), bbArraySorted.end(), [this](float* a, float* b) {
+                float centerX1 = this->GetCenterX(a);
+                float centerX2 = this->GetCenterX(b);
+                
+                float centerY1 = this->GetCenterY(a);
+                float centerY2 = this->GetCenterY(b);
 
-            float hyp1 = this->hypotenuse(centerX1, centerY1, this->camCenterX, this->camCenterY);
-            float hyp2 = this->hypotenuse(centerX2, centerY2, this->camCenterX, this->camCenterY);
-            
-            return hyp1 < hyp2;
-        });
+                float hyp1 = this->hypotenuse(centerX1, centerY1, this->camCenterX, this->camCenterY);
+                float hyp2 = this->hypotenuse(centerX2, centerY2, this->camCenterX, this->camCenterY);
+                
+                return hyp1 < hyp2;
+            });
+        }
 
         for(auto a : bbArraySorted) {
             float cX = GetCenterX(a);
@@ -66,6 +68,13 @@ void DetectNetController::Loop(){
         }
         std::cout << "\n";
         //std::cin.ignore();
+        return bbArraySorted;
+}
+
+float* DetectNetController::GetTargetBB(){
+    std::vector<float*> sortedArray = GetSortedBBArray();
+    if(0 < sortedArray.size()) return sortedArray[0];
+    else return nullptr;
 }
 
 float DetectNetController::hypotenuse(float x1, float y1, float x2, float y2) {
@@ -82,11 +91,13 @@ volatile int* DetectNetController::GetNumBB(){
 }
 
 float DetectNetController::GetCenterX(float* bbArray) {
-    return (bbArray[0] + bbArray[2]) / 2.0;
+    if(bbArray) return (bbArray[0] + bbArray[2]) / 2.0;
+    else return -1;
 }
 
 float DetectNetController::GetCenterY(float* bbArray) {
-    return (bbArray[1] + bbArray[3]) / 2.0;
+    if(bbArray) return (bbArray[1] + bbArray[3]) / 2.0;
+    else return -1;
 }
 
 uint32_t DetectNetController::GetCamWidth(){

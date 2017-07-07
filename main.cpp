@@ -13,7 +13,7 @@ int main (int argc, char** argv){
     humanoid->detectnetController->Init();
 
     while((c = getchar()) != 27){
-        humanoid->detectnetController->Loop();
+        humanoid->detectnetController->GetTargetBB();
     }
      
 

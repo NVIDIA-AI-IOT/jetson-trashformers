@@ -30,7 +30,8 @@ class DetectNetController {
         void SetCamPort(int source);
 
         void Init();
-        void Loop();
+        std::vector<float*> GetSortedBBArray();
+        float* GetTargetBB();
 
         float camCenterX;
         float camCenterY;
@@ -40,6 +41,8 @@ class DetectNetController {
         float** bbArray;
         std::vector<float*> bbArraySorted;
         volatile int numBB;
+
+        int iterate;
 
 
         //float *boxes;
