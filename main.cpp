@@ -16,24 +16,32 @@ int main (int argc, char** argv){
     humanoid->detectnetController->ReadCameraResolution();
 
     //Define acceptable distance tolerance where robot will no longer react and try to turn
-    int reactionTolerance = 0.10 * humanoid->detectnetController->GetCameraWidth();
+    int xReactionTolerance = 0.10 * humanoid->detectnetController->GetCameraWidth();
+    int areaTolerance = 0.20 * humanoid->detectnetController->GetCameraWidth() * humanoid->detectnetController->GetCameraHeight();
 
-    printf("TOLERANCE %i\n", reactionTolerance);
+    printf("TOLERANCE %i\n", xReactionTolerance);
     while((inputChar = getchar()) != 27){
+        humanoid->detectnetController->SortBBArrayByTargetDistance();
+
         float xError = humanoid->detectnetController->GetErrorXOfTargetBB();
-        if(xError == NULL) {
-            printf("ERROR DNE\n"); 
+        float bbArea = humanoid->detectnetController->GetAreaOfTargetBB(); 
+        printf("AREA: %f\n", bbArea);
+        if(xError == NULL || bbArea == -1) {
+            printf("XERROR DNE\n"); 
             humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
-        } else if(xError >= reactionTolerance) {
-            printf("ERROR: %f | TURNING RIGHT\n", xError);
+        } else if(xError >= xReactionTolerance) {
+            printf("YERROR: %f | TURNING RIGHT\n", xError);
             humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STRAFE_RIGHT);
-        } else if(xError <= (reactionTolerance)*-1) {
-            printf("ERROR: %f | TURNING LEFT\n", xError);
+        } else if(xError <= (xReactionTolerance)*-1) {
+            printf("XERROR: %f | TURNING LEFT\n", xError);
             humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STRAFE_LEFT);
+        } else if(bbArea <= areaTolerance){
+            printf("ERROR: %f | WALKING FORWARD\n", bbArea);
+            humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::WALK_FORWARD);
         } else {
             printf("ERROR: %f | STOPPING\n", xError);
             humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
-        }
+        } 
     }
 
     //

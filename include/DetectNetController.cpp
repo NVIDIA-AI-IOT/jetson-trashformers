@@ -5,7 +5,7 @@ DetectNetController::DetectNetController(int argc, char** argv){
     m_argc = argc;
     m_argv = argv;
     
-    SetCameraPort(-1);
+    SetCameraPort(1);
     detectNetThread = new std::thread(&DetectNetController::runThread, this);
 }
 
@@ -37,7 +37,6 @@ std::vector<float*> DetectNetController::SortBBArrayByTargetDistance(){
         bbArrayUnsorted = ReadUnsortedBBArray();
         numberOfDetectedBB = *ReadNumberOfDetectedBB();
 
-        std::vector<float*> bbArraySorted;
         bbArraySorted.clear();
 
         printf("Found %i Bounding Boxes.\n", numberOfDetectedBB);
@@ -79,10 +78,16 @@ std::vector<float*> DetectNetController::SortBBArrayByTargetDistance(){
         return bbArraySorted;
 }
 
-float* DetectNetController::GetBBNearestToCenter(){
+float* DetectNetController::GetTargetBB(){
     std::vector<float*> sortedArray = SortBBArrayByTargetDistance();
     if(sortedArray.size() > 0) return sortedArray[0];
     else return nullptr;
+}
+
+float DetectNetController::GetAreaOfTargetBB(){
+    if(bbArraySorted.size() < 1) return -1;
+    float* bb = bbArraySorted[0];
+    return (bb[2]-bb[0]) * (bb[3]-bb[1]);
 }
 
 float DetectNetController::GetDistanceFromTwoPoints(float x1, float y1, float x2, float y2) {
@@ -109,13 +114,15 @@ float DetectNetController::GetCenterYFromBB(float* bb) {
 }
 
 float DetectNetController::GetErrorXOfTargetBB() {
-   float cX = GetCenterXFromBB(GetBBNearestToCenter());
+   if(bbArraySorted.size() < 1) return NULL;
+   float cX = GetCenterXFromBB(bbArraySorted[0]);
    if(cX == -1) return NULL;
    return cX - GetCameraCenterX(); 
 }
 
 float DetectNetController::GetErrorYOfTargetBB() {
-   float cY = GetCenterYFromBB(GetBBNearestToCenter());
+   if(bbArraySorted.size() < 1) return NULL;
+   float cY = GetCenterYFromBB(bbArraySorted[0]);
    if(cY == -1) return NULL;
    return cY - GetCameraCenterY(); 
 }
