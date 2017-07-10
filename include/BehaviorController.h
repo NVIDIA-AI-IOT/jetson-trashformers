@@ -16,6 +16,9 @@ class BehaviorController {
             TURN_LEFT,
             STRAFE_LEFT,
             STRAFE_RIGHT,
+	    DIAGONAL_RIGHT,
+	    DIAGONAL_LEFT, 
+	    BEND_DOWN,
             STOP
             
         };
