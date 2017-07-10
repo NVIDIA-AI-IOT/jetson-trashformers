@@ -6,16 +6,12 @@ KeyboardController::KeyboardController(ZigbController* zigb) { //CONSTRUCTOR
 
 
 void KeyboardController::Init(){
-    /* get the terminal settings for stdin */
     tcgetattr(STDIN_FILENO,&old_tio);
 
-    /* we want to keep the old setting to restore them a the end */
     new_tio=old_tio;
 
-    /* disable canonical mode (buffered i/o) and local echo */
     new_tio.c_lflag &=(~ICANON & ~ECHO);
 
-    /* set the new settings immediately */
     tcsetattr(STDIN_FILENO,TCSANOW,&new_tio);
 
 }
@@ -74,7 +70,6 @@ void KeyboardController::RunInput(){
 }
 
 void KeyboardController::Terminate(){
-    //turn off immediate console buffering
     tcsetattr(STDIN_FILENO,TCSANOW,&old_tio);
 }
 
