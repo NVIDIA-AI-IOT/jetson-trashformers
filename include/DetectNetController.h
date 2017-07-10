@@ -17,6 +17,9 @@ class DetectNetController {
         DetectNetController(int argc, char** argv);
         virtual ~DetectNetController();
 
+        //Structure of Bounding Box: [x1][y1][x2][y2] (bottom left: x1, y1; top right: x2, y2)
+        std::vector<float*> SortBBArrayByTargetDistance();
+        std::vector<float*> bbArraySorted;
         
         //Thread Control Functions 
         void JoinDetectThread();
@@ -28,8 +31,6 @@ class DetectNetController {
 
         float GetCenterXFromBB(float* bb);
         float GetCenterYFromBB(float* bb);
-        float GetErrorXOfTargetBB();
-        float GetErrorYOfTargetBB();
         bool IsDetectNetReady();
         void SetCameraPort(int source);
 
@@ -38,7 +39,10 @@ class DetectNetController {
         float GetCameraCenterX();
         float GetCameraCenterY();
 
-        float* GetBBNearestToCenter();
+        float* GetTargetBB();
+        float GetAreaOfTargetBB();
+        float GetErrorXOfTargetBB();
+        float GetErrorYOfTargetBB();
 
     private:
         float** bbArrayUnsorted;
@@ -49,7 +53,6 @@ class DetectNetController {
         float cameraWidth;
         float cameraHeight;
 
-        std::vector<float*> SortBBArrayByTargetDistance();
 
         float GetDistanceFromTwoPoints(float x1, float y1, float x2, float y2);
 
