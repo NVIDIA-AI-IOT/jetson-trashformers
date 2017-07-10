@@ -16,43 +16,50 @@ class DetectNetController {
     public:
         DetectNetController(int argc, char** argv);
         virtual ~DetectNetController();
+
         
+        //Thread Control Functions 
         void JoinDetectThread();
 
-        float** GetBBArray();
-        volatile int* GetNumBB();
+        //Functions that read values from detectnet-controller.cpp
+        void ReadCameraResolution();
+        float** ReadUnsortedBBArray();
+        volatile int* ReadNumberOfDetectedBB();
 
-        float GetCenterX(float* bbArray);
-        float GetCenterY(float* bbArray);
-        float GetErrorX();
-        float GetErrorY();
-        float GetHypotenuse();
-        uint32_t GetCamWidth();
-        uint32_t GetCamHeight();
-        bool IsCameraLoaded();
-        void SetCamPort(int source);
+        float GetCenterXFromBB(float* bb);
+        float GetCenterYFromBB(float* bb);
+        float GetErrorXOfTargetBB();
+        float GetErrorYOfTargetBB();
+        bool IsDetectNetReady();
+        void SetCameraPort(int source);
 
-        void Init();
-        std::vector<float*> GetSortedBBArray();
-        float* GetTargetBB();
+        float GetCameraWidth();
+        float GetCameraHeight();
+        float GetCameraCenterX();
+        float GetCameraCenterY();
 
-        float camCenterX;
-        float camCenterY;
-        float hypotenuse(float x1, float y1, float x2, float y2);
-        
+        float* GetBBNearestToCenter();
+
     private:
-        float** bbArray;
-        std::vector<float*> bbArraySorted;
-        volatile int numBB;
+        float** bbArrayUnsorted;
+        volatile int numberOfDetectedBB;
 
-        int iterate;
+        float cameraCenterX;
+        float cameraCenterY;
+        float cameraWidth;
+        float cameraHeight;
 
+        std::vector<float*> SortBBArrayByTargetDistance();
 
-        //float *boxes;
+        float GetDistanceFromTwoPoints(float x1, float y1, float x2, float y2);
+
+        //Thread Control
         void runThread();
+        std::thread* detectNetThread;
+
+        //Arguments
         int m_argc;
         char** m_argv;
-        std::thread* detectNetThread;
 };
 
 #endif
