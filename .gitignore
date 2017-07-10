@@ -1,4 +1,3 @@
 *.o
 *.swp
 main
-lib/*.so
