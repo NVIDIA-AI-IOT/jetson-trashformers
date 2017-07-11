@@ -5,7 +5,7 @@ DetectNetController::DetectNetController(int argc, char** argv){
     m_argc = argc;
     m_argv = argv;
     
-    SetCameraPort(1);
+    SetCameraPort(-1);
     detectNetThread = new std::thread(&DetectNetController::runThread, this);
 }
 
@@ -152,11 +152,11 @@ float DetectNetController::GetCameraCenterY(){
     return cameraCenterY;
 }
 
-int DetectNetController::GetCupOrientation(){
+DetectNetController::CupOrientation DetectNetController::GetCupOrientation(){
     float* targetCup = GetTargetBB();
-    if(targetCup == NULL) return -1;
+    if(targetCup == NULL) return CupOrientation::UKNOWN;
     float width = targetCup[2] - targetCup[0];
     float height = targetCup[3] - targetCup[1];
-    if(width > height) return HORIZONTAL;
-    return VERTICAL;
+    if(width > height) return CupOrientation::HORIZONTAL;
+    return CupOrientation::VERTICAL;
 }
