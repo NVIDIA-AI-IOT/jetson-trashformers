@@ -13,6 +13,7 @@ int main (int argc, char** argv){
     while(!humanoid->detectnetController->IsDetectNetReady()) {
     }
 
+
     humanoid->detectnetController->ReadCameraResolution();
 
     //Define acceptable distance tolerance where robot will no longer react and try to turn
@@ -22,6 +23,7 @@ int main (int argc, char** argv){
     printf("TOLERANCE %i\n", xReactionTolerance);
     while((inputChar = getchar()) != 27){
         humanoid->detectnetController->SortBBArrayByTargetDistance();
+	printf("Orientation: %i\n", humanoid->detectnetController->GetCupOrientation());
 
         float xError = humanoid->detectnetController->GetErrorXOfTargetBB();
         float bbArea = humanoid->detectnetController->GetAreaOfTargetBB(); 

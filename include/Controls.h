@@ -30,5 +30,6 @@ static const int BUTTON_DIAGONAL_DORSAL_LEFT    = BUTTON_L + BUTTON_D + BUTTON_5
 static const int BUTTON_DIAGONAL_DORSAL_RIGHT   = BUTTON_R + BUTTON_D + BUTTON_5;
 static const int BUTTON_GET_UP_FACING_UP        = BUTTON_1 + BUTTON_U;
 static const int BUTTON_GET_UP_FACING_DOWN      = BUTTON_1 + BUTTON_D;
+static const int BUTTON_BEND_DOWN 		= BUTTON_3;
 
 #endif //CONTROLS_H_
