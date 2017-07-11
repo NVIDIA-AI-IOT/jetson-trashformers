@@ -16,25 +16,33 @@ class DetectNetController {
     public:
         DetectNetController(int argc, char** argv);
         virtual ~DetectNetController();
+
+        //Structure of Bounding Box: [x1][y1][x2][y2] (bottom left: x1, y1; top right: x2, y2)
+        std::vector<float*> SortBBArrayByTargetDistance();
+        std::vector<float*> bbArraySorted;
         
+        //Thread Control Functions 
         void JoinDetectThread();
 
-        float** GetBBArray();
-        volatile int* GetNumBB();
+        //Functions that read values from detectnet-controller.cpp
+        void ReadCameraResolution();
+        float** ReadUnsortedBBArray();
+        volatile int* ReadNumberOfDetectedBB();
 
-        float GetCenterX(float* bbArray);
-        float GetCenterY(float* bbArray);
-        float GetErrorX();
-        float GetErrorY();
-        float GetHypotenuse();
-        uint32_t GetCamWidth();
-        uint32_t GetCamHeight();
-        bool IsCameraLoaded();
-        void SetCamPort(int source);
+        float GetCenterXFromBB(float* bb);
+        float GetCenterYFromBB(float* bb);
+        bool IsDetectNetReady();
+        void SetCameraPort(int source);
 
-        void Init();
-        std::vector<float*> GetSortedBBArray();
+        float GetCameraWidth();
+        float GetCameraHeight();
+        float GetCameraCenterX();
+        float GetCameraCenterY();
+
         float* GetTargetBB();
+        float GetAreaOfTargetBB();
+        float GetErrorXOfTargetBB();
+        float GetErrorYOfTargetBB();
 
         float camCenterX;
         float camCenterY;
@@ -43,20 +51,26 @@ class DetectNetController {
 	static const int VERTICAL = 0;
 	static const int HORIZONTAL = 1;
 	int GetCupOrientation();
-        
+
     private:
-        float** bbArray;
-        std::vector<float*> bbArraySorted;
-        volatile int numBB;
+        float** bbArrayUnsorted;
+        volatile int numberOfDetectedBB;
 
-        int iterate;
+        float cameraCenterX;
+        float cameraCenterY;
+        float cameraWidth;
+        float cameraHeight;
 
 
-        //float *boxes;
+        float GetDistanceFromTwoPoints(float x1, float y1, float x2, float y2);
+
+        //Thread Control
         void runThread();
+        std::thread* detectNetThread;
+
+        //Arguments
         int m_argc;
         char** m_argv;
-        std::thread* detectNetThread;
 };
 
 #endif
