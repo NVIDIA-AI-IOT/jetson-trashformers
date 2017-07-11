@@ -10,10 +10,14 @@
 #define ADDR_MX_TORQUE_ENABLE 24
 #define ADDR_MX_GOAL_POSITION 30
 #define ADDR_MX_PRESENT_POSITION 36
+#define ADDR_MX_GOAL_SPEED 32
 #define PROTOCOL_VERSION 1
+
 #define BAUDRATE 1000000 
+
 #define TORQUE_ENABLE 1
 #define TORQUE_DISABLE 0
+
 #define DEVICENAME_DEFAULT "/dev/ttyUSB0"
 class Servo {
 	public:				
@@ -22,20 +26,20 @@ class Servo {
 		virtual ~Servo();
 
 		int Enable(bool enable);
-		int SetSetpoint(uint16_t setpoint);
-		
+		int SetPositionSetpoint(uint16_t setpoint);
 		int GetPosition();
-		
+        
+        	int SetVelocitySetpoint(uint16_t setpoint);		
 	private: 
 		int m_dxl_id;
 		std::string* m_devicename;
-        int dxl_comm_result = COMM_TX_FAIL;
-        uint8_t dxl_error = 0;
-        uint16_t dxl_present_position;
+       		int dxl_comm_result = COMM_TX_FAIL;
+        	uint8_t dxl_error = 0;
+        	uint16_t dxl_present_position;
 
-        dynamixel::PortHandler* m_portHandler;
+        	dynamixel::PortHandler* m_portHandler;
 		dynamixel::PacketHandler* packetHandler;
 
-        bool CheckError();
+        	bool CheckError();
 };
 #endif

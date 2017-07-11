@@ -23,7 +23,7 @@ int Servo::Enable(bool enable) {
     return 0;
 }
 
-int Servo::SetSetpoint(uint16_t setpoint) {
+int Servo::SetPositionSetpoint(uint16_t setpoint) {
     dxl_comm_result = packetHandler->write2ByteTxRx(m_portHandler, m_dxl_id, ADDR_MX_GOAL_POSITION, setpoint, &dxl_error);
     
    if( CheckError() ) {
@@ -43,6 +43,17 @@ int Servo::GetPosition() {
 
     return dxl_present_position;
 }
+
+int Servo::SetVelocitySetpoint(uint16_t setpoint) {
+    dxl_comm_result = packetHandler->write2ByteTxRx(m_portHandler, m_dxl_id, ADDR_MX_GOAL_SPEED, setpoint, &dxl_error);
+    
+   if( CheckError() ) {
+        return -1;
+   }
+    
+   return 0;
+}
+
 
 bool Servo::CheckError() {
 

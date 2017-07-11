@@ -24,12 +24,12 @@ class Arm {
         Arm(SerialHandler* serialHandler);
         virtual ~Arm();
 
-        void Set(int pos_shoulder, int pos_elbow, int pos_wrist, int pos_claw);
+        void Set(int pos_shoulder, int pos_elbow, int pos_wrist, int pos_claw, int vel_setpoint);
 
-        void SetShoulder(int pos_shoulder);
-        void SetElbow(int pos_elbow);
-        void SetWrist(int pos_wrist);
-        void SetClaw(int pos_claw);
+        void SetShoulder(int pos_shoulder, int vel);
+        void SetElbow(int pos_elbow, int vel);
+        void SetWrist(int pos_wrist, int vel);
+        void SetClaw(int pos_claw, int vel);
         
         void SetDefaultPose();
        
