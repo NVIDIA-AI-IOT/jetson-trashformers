@@ -17,7 +17,7 @@ int main (int argc, char** argv){
     int tolerance = 0.10 * humanoid->detectnetController->GetCamWidth();
     printf("TOLERANCE %i\n", tolerance);
     while((c = getchar()) != 27){
-        //humanoid->detectnetController->GetTargetBB();
+        printf("Orientation: %i\n", humanoid->detectnetController->GetCupOrientation());
         float xError = humanoid->detectnetController->GetErrorX();
         if(xError == NULL) {
             printf("ERROR DNE\n"); 

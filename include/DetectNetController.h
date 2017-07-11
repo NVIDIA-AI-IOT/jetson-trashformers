@@ -39,6 +39,10 @@ class DetectNetController {
         float camCenterX;
         float camCenterY;
         float hypotenuse(float x1, float y1, float x2, float y2);
+
+	static const int VERTICAL = 0;
+	static const int HORIZONTAL = 1;
+	int GetCupOrientation();
         
     private:
         float** bbArray;

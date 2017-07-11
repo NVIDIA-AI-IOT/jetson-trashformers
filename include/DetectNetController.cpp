@@ -131,3 +131,11 @@ bool DetectNetController::IsCameraLoaded(){
 void DetectNetController::SetCamPort(int source){
     setCameraPort(source);
 }
+
+int DetectNetController::GetCupOrientation(){
+    float* targetCup = GetTargetBB();
+    float width = targetCup[2] - targetCup[0];
+    float height = targetCup[3] - targetCup[1];
+    if(width > height) return HORIZONTAL;
+    return VERTICAL;
+}
