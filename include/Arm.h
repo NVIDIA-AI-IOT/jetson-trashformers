@@ -8,10 +8,10 @@
 #include "SerialHandler.h"
 
 #define SHOULDER_MAX 800
-#define SHOULDER_MIN 350
+#define SHOULDER_MIN 150
 
-#define ELBOW_MAX 1000
-#define ELBOW_MIN 550
+#define ELBOW_MAX 1023
+#define ELBOW_MIN 350
 
 #define WRIST_MAX 700
 #define WRIST_MIN 250
@@ -32,12 +32,18 @@ class Arm {
         void SetClaw(int pos_claw, int vel);
         
         void SetDefaultPose();
+        void SetReadyPose();
+        void SetGrabbingPose();
+        void GrabCup(); 
+        void LivePose();
        
     private:
         SerialHandler* m_serialHandler;
         Servo *shoulder, *bicep, *elbow, *claw;
-        int pos_shoulder, pos_bicep, pos_elbow, pos_claw;
-        int pose_default[4] = {330, 590, 700, 610};       
+        int pos_shoulder, pos_elbow, pos_wrist, pos_claw;
+        int pose_default[4] = {330, 600, 700, 610};   
+        int pose_ready[4] = {650, 700, 350, 220};
+        int pose_grabbing[4] = {650, 480, 250, 610};
 };
 
 #endif //ARM_H_

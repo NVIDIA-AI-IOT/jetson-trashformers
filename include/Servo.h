@@ -8,6 +8,7 @@
 #include "../util/dynamixel_sdk.h"
 
 #define ADDR_MX_TORQUE_ENABLE 24
+#define ADDR_MX_GOAL_TORQUE 34
 #define ADDR_MX_GOAL_POSITION 30
 #define ADDR_MX_PRESENT_POSITION 36
 #define ADDR_MX_GOAL_SPEED 32
@@ -29,8 +30,9 @@ class Servo {
 		int SetPositionSetpoint(uint16_t setpoint);
 		int GetPosition();
         
-        	int SetVelocitySetpoint(uint16_t setpoint);		
-	private: 
+        int SetVelocitySetpoint(uint16_t setpoint);		
+	    void SetSafeTorque();
+    private: 
 		int m_dxl_id;
 		std::string* m_devicename;
        		int dxl_comm_result = COMM_TX_FAIL;

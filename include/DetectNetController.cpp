@@ -5,7 +5,7 @@ DetectNetController::DetectNetController(int argc, char** argv){
     m_argc = argc;
     m_argv = argv;
     
-    SetCameraPort(-1);
+    SetCameraPort(0);
     detectNetThread = new std::thread(&DetectNetController::runThread, this);
 }
 
@@ -114,10 +114,11 @@ float DetectNetController::GetCenterYFromBB(float* bb) {
 }
 
 float DetectNetController::GetErrorXOfTargetBB() {
+   const float offset = (1.0/4.0) * (GetCameraWidth());
    if(bbArraySorted.size() < 1) return NULL;
    float cX = GetCenterXFromBB(bbArraySorted[0]);
    if(cX == -1) return NULL;
-   return cX - GetCameraCenterX(); 
+   return cX - GetCameraCenterX() - offset; 
 }
 
 float DetectNetController::GetErrorYOfTargetBB() {
