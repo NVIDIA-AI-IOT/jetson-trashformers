@@ -88,8 +88,8 @@ layer {
     flip_prob: 0.5
     rotation_prob: 0.0
     max_rotate_degree: 5.0
-    hue_rotation_prob: 0.9
-    hue_rotation: 60.0
+    hue_rotation_prob: 0.800000011921
+    hue_rotation: 30.0
     desaturation_prob: 0.800000011921
     desaturation_max: 0.800000011921
   }

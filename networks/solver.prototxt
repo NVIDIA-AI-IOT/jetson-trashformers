@@ -2,12 +2,12 @@ test_iter: 25
 test_interval: 57
 base_lr: 0.0001
 display: 7
-max_iter: 2850
+max_iter: 5700
 lr_policy: "step"
 gamma: 0.1
 momentum: 0.9
 weight_decay: 1e-06
-stepsize: 941
+stepsize: 1881
 snapshot: 57
 snapshot_prefix: "snapshot"
 solver_mode: GPU
