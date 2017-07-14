@@ -35,10 +35,10 @@ void BehaviorController::ChangeState(ControllerState state) {
             m_zigb->SendCommand(BUTTON_SIDESTEP_RIGHT);
             break;
         case ControllerState::DIAGONAL_RIGHT:
-            m_zigb->SendCommand(BUTTON_WALK_FORWARD_LEFT);
+            m_zigb->SendCommand(BUTTON_WALK_FORWARD_RIGHT);
             break;
         case ControllerState::DIAGONAL_LEFT:
-            m_zigb->SendCommand(BUTTON_WALK_FORWARD_RIGHT);
+            m_zigb->SendCommand(BUTTON_WALK_FORWARD_LEFT);
             break;
         case ControllerState::BEND_DOWN:
             m_zigb->SendCommand(BUTTON_BEND_DOWN);

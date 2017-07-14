@@ -6,7 +6,7 @@ layer {
     phase: TRAIN
   }
   data_param {
-    source: "/var/lib/digits/jobs/20170707-165717-51e5/train_db/features"
+    source: "/var/lib/digits/jobs/20170712-094049-e607/train_db/features"
     batch_size: 10
     backend: LMDB
   }
@@ -19,7 +19,7 @@ layer {
     phase: TRAIN
   }
   data_param {
-    source: "/var/lib/digits/jobs/20170707-165717-51e5/train_db/labels"
+    source: "/var/lib/digits/jobs/20170712-094049-e607/train_db/labels"
     batch_size: 10
     backend: LMDB
   }
@@ -32,7 +32,7 @@ layer {
     phase: TEST
   }
   data_param {
-    source: "/var/lib/digits/jobs/20170707-165717-51e5/val_db/features"
+    source: "/var/lib/digits/jobs/20170712-094049-e607/val_db/features"
     batch_size: 6
     backend: LMDB
   }
@@ -45,7 +45,7 @@ layer {
     phase: TEST
   }
   data_param {
-    source: "/var/lib/digits/jobs/20170707-165717-51e5/val_db/labels"
+    source: "/var/lib/digits/jobs/20170712-094049-e607/val_db/labels"
     batch_size: 6
     backend: LMDB
   }
@@ -88,8 +88,8 @@ layer {
     flip_prob: 0.5
     rotation_prob: 0.0
     max_rotate_degree: 5.0
-    hue_rotation_prob: 0.800000011921
-    hue_rotation: 30.0
+    hue_rotation_prob: 0.9
+    hue_rotation: 60.0
     desaturation_prob: 0.800000011921
     desaturation_max: 0.800000011921
   }
