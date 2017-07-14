@@ -9,4 +9,4 @@ DISPLAY=:0
 NET=networks
 
 #run main with detectnet params
-./main --prototxt=$NET/deploy.prototxt --model=$NET/snapshot_iter_1254.caffemodel --input_blob=data --output_cvg=coverage --output_bbox=bboxes
+./main --prototxt=$NET/deploy.prototxt --model=$NET/snapshot_iter_84.caffemodel --input_blob=data --output_cvg=coverage --output_bbox=bboxes
