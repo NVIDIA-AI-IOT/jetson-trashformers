@@ -7,17 +7,17 @@
 
 class Head {
 
-    public:
-        
-        Head(SerialHandler* serialHandler);
-        virtual ~Head();
+public:
 
-        void moveHead(float dist, float bb_x, float bb_y, float bb_area, float camWidth, float camHeight); 
-        
+    Head(SerialHandler* serialHandler);
+    virtual ~Head();
 
-    private:
-        Servo* cameraServo;
-        SerialHandler* m_serialHandler;
+    void moveHead(float dist, float bb_x, float bb_y, float bb_area, float camWidth, float camHeight); 
+
+
+private:
+    Servo* cameraServo;
+    SerialHandler* m_serialHandler;
 
 };
 

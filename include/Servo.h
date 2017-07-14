@@ -21,27 +21,27 @@
 
 #define DEVICENAME_DEFAULT "/dev/ttyUSB0"
 class Servo {
-	public:				
-		Servo(int dxl_id, dynamixel::PortHandler* portHandler);
-		Servo(int dxl_id, std::string* devicename, dynamixel::PortHandler* portHandler);
-		virtual ~Servo();
+public:				
+    Servo(int dxl_id, dynamixel::PortHandler* portHandler);
+    Servo(int dxl_id, std::string* devicename, dynamixel::PortHandler* portHandler);
+    virtual ~Servo();
 
-		int Enable(bool enable);
-		int SetPositionSetpoint(uint16_t setpoint);
-		int GetPosition();
-        
-        int SetVelocitySetpoint(uint16_t setpoint);		
-	    void SetSafeTorque();
-    private: 
-		int m_dxl_id;
-		std::string* m_devicename;
-       		int dxl_comm_result = COMM_TX_FAIL;
-        	uint8_t dxl_error = 0;
-        	uint16_t dxl_present_position;
+    int Enable(bool enable);
+    int SetPositionSetpoint(uint16_t setpoint);
+    int GetPosition();
 
-        	dynamixel::PortHandler* m_portHandler;
-		dynamixel::PacketHandler* packetHandler;
+    int SetVelocitySetpoint(uint16_t setpoint);		
+    void SetSafeTorque();
+private: 
+    int m_dxl_id;
+    std::string* m_devicename;
+    int dxl_comm_result = COMM_TX_FAIL;
+    uint8_t dxl_error = 0;
+    uint16_t dxl_present_position;
 
-        	bool CheckError();
+    dynamixel::PortHandler* m_portHandler;
+    dynamixel::PacketHandler* packetHandler;
+
+    bool CheckError();
 };
 #endif

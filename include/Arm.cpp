@@ -87,9 +87,9 @@ void Arm::LivePose() {
     int shoulder, elbow, wrist, claw;
     std::cout << "Shoulder? ";
     std::cin >> shoulder;
-    
+
     SetShoulder(shoulder, 1023);
- 
+
     std::cout << "Elbow? ";
     std::cin >> elbow;
 
@@ -106,5 +106,5 @@ void Arm::LivePose() {
     SetClaw(claw, 1023);
 
     //Set(pos_shoulder, pos_elbow, pos_wrist, pos_claw, 1023);    
-    
+
 }

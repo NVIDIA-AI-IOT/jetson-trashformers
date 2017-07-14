@@ -10,21 +10,21 @@
 #include "ZigbController.h"
 
 class KeyboardController{
-    public:
-        KeyboardController(ZigbController* zigb);
-    
-        virtual ~KeyboardController();
+public:
+    KeyboardController(ZigbController* zigb);
 
-        void Init();
-        void RunInput();
-        void Terminate();
+    virtual ~KeyboardController();
 
-        
-    private:
-        ZigbController *zigb;
-        struct termios old_tio, new_tio;
-        unsigned char c;
-        
+    void Init();
+    void RunInput();
+    void Terminate();
+
+
+private:
+    ZigbController *zigb;
+    struct termios old_tio, new_tio;
+    unsigned char c;
+
 };
 
 #endif //KEYBOARDCONTROLLER_H_

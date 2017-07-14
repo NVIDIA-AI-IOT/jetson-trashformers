@@ -15,51 +15,51 @@
 #include "BehaviorController.h"
 
 class Humanoid {
-    public:
-        Humanoid(int argc, char** argv);
-        virtual ~Humanoid();
-        
-        double GetCupCenterY();
-        double GetCupCenterX();
+public:
+    Humanoid(int argc, char** argv);
+    virtual ~Humanoid();
 
-        void UseKeyboard();
-        
-        //Movement commands through Zigbee
-        void Stop();
-        
-        void WalkForward();
-        void WalkBackward();
+    double GetCupCenterY();
+    double GetCupCenterX();
 
-        void TurnLeft();
-        void TurnRight();
+    void UseKeyboard();
 
-        void WalkForwardLeft();
-        void WalkForwardRight();
+    //Movement commands through Zigbee
+    void Stop();
 
-        void SidestepLeft();
-        void SidestepRight();
+    void WalkForward();
+    void WalkBackward();
 
-        void FastSidestepLeft();
-        void FastSidestepRight();
+    void TurnLeft();
+    void TurnRight();
 
-        void StepDiagonalFrontalLeft();
-        void StepDiagonalFrontalRight();
+    void WalkForwardLeft();
+    void WalkForwardRight();
 
-        void StepDiagonalDorsalLeft();
-        void StepDiagonalDorsalRight();
+    void SidestepLeft();
+    void SidestepRight();
 
-        void GetUpFacingUp();
-        void GetUpFacingDown();
+    void FastSidestepLeft();
+    void FastSidestepRight();
 
-        Servo* motor_1;
-        SerialHandler* serialHandler;
-        Arm* arm;
-        Head* head;
-        DetectNetController* detectnetController;
-        BehaviorController* behaviorController; 
-    private:
-        ZigbController* zigb;
-        KeyboardController* keyboardController;
+    void StepDiagonalFrontalLeft();
+    void StepDiagonalFrontalRight();
+
+    void StepDiagonalDorsalLeft();
+    void StepDiagonalDorsalRight();
+
+    void GetUpFacingUp();
+    void GetUpFacingDown();
+
+    Servo* motor_1;
+    SerialHandler* serialHandler;
+    Arm* arm;
+    Head* head;
+    DetectNetController* detectnetController;
+    BehaviorController* behaviorController; 
+private:
+    ZigbController* zigb;
+    KeyboardController* keyboardController;
 };
 
 #endif // HUMANOID_H_

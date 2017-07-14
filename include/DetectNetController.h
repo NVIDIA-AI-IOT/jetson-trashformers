@@ -13,64 +13,64 @@
 #include "../util/detectnet-camera.h"
 
 class DetectNetController {
-    public:
-        DetectNetController(int argc, char** argv);
-        virtual ~DetectNetController();
+public:
+    DetectNetController(int argc, char** argv);
+    virtual ~DetectNetController();
 
-        //Structure of Bounding Box: [x1][y1][x2][y2] (bottom left: x1, y1; top right: x2, y2)
-        std::vector<float*> SortBBArrayByTargetDistance();
-        std::vector<float*> bbArraySorted;
-        
-        //Thread Control Functions 
-        void JoinDetectThread();
+    //Structure of Bounding Box: [x1][y1][x2][y2] (bottom left: x1, y1; top right: x2, y2)
+    std::vector<float*> SortBBArrayByTargetDistance();
+    std::vector<float*> bbArraySorted;
 
-        //Functions that read values from detectnet-controller.cpp
-        void ReadCameraResolution();
-        float** ReadUnsortedBBArray();
-        volatile int* ReadNumberOfDetectedBB();
+    //Thread Control Functions 
+    void JoinDetectThread();
 
-        float GetCenterXFromBB(float* bb);
-        float GetCenterYFromBB(float* bb);
-        bool IsDetectNetReady();
-        void SetCameraPort(int source);
+    //Functions that read values from detectnet-controller.cpp
+    void ReadCameraResolution();
+    float** ReadUnsortedBBArray();
+    volatile int* ReadNumberOfDetectedBB();
 
-        float GetCameraWidth();
-        float GetCameraHeight();
-        float GetCameraCenterX();
-        float GetCameraCenterY();
+    float GetCenterXFromBB(float* bb);
+    float GetCenterYFromBB(float* bb);
+    bool IsDetectNetReady();
+    void SetCameraPort(int source);
 
-        float* GetTargetBB();
-        float GetAreaOfTargetBB();
-        float GetErrorXOfTargetBB();
-        float GetErrorYOfTargetBB();
+    float GetCameraWidth();
+    float GetCameraHeight();
+    float GetCameraCenterX();
+    float GetCameraCenterY();
 
-        enum class CupOrientation {
-            VERTICAL=0,
-            HORIZONTAL=1,
-            UKNOWN=2
-        };
-    
-        DetectNetController::CupOrientation GetCupOrientation();
+    float* GetTargetBB();
+    float GetAreaOfTargetBB();
+    float GetErrorXOfTargetBB();
+    float GetErrorYOfTargetBB();
 
-    private:
-        float** bbArrayUnsorted;
-        volatile int numberOfDetectedBB;
+    enum class CupOrientation {
+        VERTICAL=0,
+                HORIZONTAL=1,
+                UKNOWN=2
+    };
 
-        float cameraCenterX;
-        float cameraCenterY;
-        float cameraWidth;
-        float cameraHeight;
+    DetectNetController::CupOrientation GetCupOrientation();
+
+private:
+    float** bbArrayUnsorted;
+    volatile int numberOfDetectedBB;
+
+    float cameraCenterX;
+    float cameraCenterY;
+    float cameraWidth;
+    float cameraHeight;
 
 
-        float GetDistanceFromTwoPoints(float x1, float y1, float x2, float y2);
+    float GetDistanceFromTwoPoints(float x1, float y1, float x2, float y2);
 
-        //Thread Control
-        void runThread();
-        std::thread* detectNetThread;
+    //Thread Control
+    void runThread();
+    std::thread* detectNetThread;
 
-        //Arguments
-        int m_argc;
-        char** m_argv;
+    //Arguments
+    int m_argc;
+    char** m_argv;
 };
 
 #endif

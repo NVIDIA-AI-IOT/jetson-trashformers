@@ -6,10 +6,10 @@
 int main (int argc, char** argv){
     Humanoid* humanoid = new Humanoid(argc, argv);
     int inputChar; 
-       
+
     //Send STOP command to init zigbeecontroller
     humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
-    
+
     humanoid->arm->SetDefaultPose();
     //do nothing until detectNet is ready
     while(!humanoid->detectnetController->IsDetectNetReady()) {
@@ -28,7 +28,7 @@ int main (int argc, char** argv){
     while(true){
         humanoid->detectnetController->SortBBArrayByTargetDistance();
         printf("Orientation: %i\n", humanoid->detectnetController->GetCupOrientation());
-        
+
         float xError = humanoid->detectnetController->GetErrorXOfTargetBB();
         float bbArea = humanoid->detectnetController->GetAreaOfTargetBB(); 
 
@@ -48,8 +48,8 @@ int main (int argc, char** argv){
                 break;
             }
             else {
-               printf("XERROR DNE | STOP\n"); 
-               humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
+                printf("XERROR DNE | STOP\n"); 
+                humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
             }
         } else if(xError >= xReactionTolerance) {
             printf("YERROR: %f | TURNING RIGHT\n", xError);
