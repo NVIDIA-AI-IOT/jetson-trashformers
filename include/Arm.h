@@ -13,7 +13,7 @@
 #define ELBOW_MAX 1023
 #define ELBOW_MIN 350
 
-#define WRIST_MAX 700
+#define WRIST_MAX 762
 #define WRIST_MIN 250
 
 #define CLAW_MAX 610
@@ -45,7 +45,7 @@ class Arm {
         SerialHandler* m_serialHandler;
         Servo *shoulder, *elbow, *wrist, *claw;
         int pos_shoulder, pos_elbow, pos_wrist, pos_claw;
-        int pose_default[4] = {330, 600, 700, 610};   
+        int pose_default[4] = {342, 572, 762, 610};   
         int pose_ready[4] = {650, 700, 350, 220};
         int pose_grabbing[4] = {650, 480, 250, 530};
         
