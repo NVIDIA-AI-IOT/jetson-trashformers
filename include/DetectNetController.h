@@ -28,6 +28,7 @@ class DetectNetController {
         void ReadCameraResolution();
         float** ReadUnsortedBBArray();
         volatile int* ReadNumberOfDetectedBB();
+        bool ReadStopSignal();
 
         float GetCenterXFromBB(float* bb);
         float GetCenterYFromBB(float* bb);

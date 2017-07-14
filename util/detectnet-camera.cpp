@@ -40,6 +40,10 @@ void sig_handler(int signo)
 	}
 }
 
+bool getStopSignal(){
+   return signal_recieved; 
+}
+
 void setCameraPort(int source){
     camera_source = source;
 }

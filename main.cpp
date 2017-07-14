@@ -2,6 +2,7 @@
 #include "include/BehaviorController.h"
 #include "include/Arm.h"
 #include <iostream>
+#include <signal.h>
 #include <thread>
 
 int main (int argc, char** argv){
@@ -26,7 +27,7 @@ int main (int argc, char** argv){
 
     bool bendDown = false;
     //while((inputChar = getchar()) != 27){
-    while(true){
+    while(!humanoid->detectnetController->ReadStopSignal()){
         humanoid->detectnetController->SortBBArrayByTargetDistance();
         printf("Orientation: %i\n", humanoid->detectnetController->GetCupOrientation());
         
@@ -83,8 +84,7 @@ int main (int argc, char** argv){
         sleep(1);
     }
 
-    //
-    //humanoid->detectnetController->JoinDetectThread();
+    humanoid->detectnetController->JoinDetectThread();
     printf("Exiting..");
 
     return 0;

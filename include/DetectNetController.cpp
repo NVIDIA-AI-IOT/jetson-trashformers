@@ -103,6 +103,13 @@ volatile int* DetectNetController::ReadNumberOfDetectedBB(){
     return getNumBoundingBox();
 }
 
+/**
+ * Returns true if CTRL + C is pressed
+ */
+bool DetectNetController::ReadStopSignal(){
+    return getStopSignal();
+}
+
 float DetectNetController::GetCenterXFromBB(float* bb) {
     if(bb) return (bb[0] + bb[2]) / 2.0;
     else return -1;
