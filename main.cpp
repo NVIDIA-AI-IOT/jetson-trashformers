@@ -1,5 +1,6 @@
 #include "include/Humanoid.h"
 #include "include/BehaviorController.h"
+#include "include/Arm.h"
 #include <iostream>
 #include <thread>
 
@@ -10,7 +11,7 @@ int main (int argc, char** argv){
     //Send STOP command to init zigbeecontroller
     humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
     
-    humanoid->arm->SetDefaultPose();
+    humanoid->arm->SetPose(Arm::ArmPose::DEFAULT);
     //do nothing until detectNet is ready
     while(!humanoid->detectnetController->IsDetectNetReady()) {
     }
@@ -40,11 +41,11 @@ int main (int argc, char** argv){
                 humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STRAFE_LEFT);
                 printf("XERROR DNE | BEND DOWN\n"); 
                 sleep(1);
-                humanoid->arm->SetReadyPose();
+                humanoid->arm->SetPose(Arm::ArmPose::READY);
                 sleep(1);
-                humanoid->arm->SetGrabbingPose();
+                humanoid->arm->SetPose(Arm::ArmPose::GRABBING);
                 sleep(1);
-                humanoid->arm->GrabCup();
+                humanoid->arm->SetPose(Arm::ArmPose::GRAB);
                 break;
             }
             else {

@@ -1,16 +1,16 @@
 #include "Arm.h"
 
 #define SHOULDER_ID 1
-#define    BICEP_ID 3
-#define    ELBOW_ID 5
+#define    ELBOW_ID 3
+#define    WRIST_ID 5
 #define     CLAW_ID 7 
 
 Arm::Arm(SerialHandler* serialHandler){
     m_serialHandler = serialHandler;
     dynamixel::PortHandler* portHandler = serialHandler->GetDynamixelPortHandler();
     shoulder = new Servo(SHOULDER_ID, portHandler);
-    bicep    = new Servo(BICEP_ID, portHandler);
     elbow    = new Servo(ELBOW_ID, portHandler);
+    wrist    = new Servo(WRIST_ID, portHandler);
     claw     = new Servo(CLAW_ID, portHandler);
 }
 
@@ -41,8 +41,8 @@ void Arm::SetElbow(int pos, int vel){
     pos = pos > ELBOW_MAX ? ELBOW_MAX : pos;
     pos = pos < ELBOW_MIN ? ELBOW_MIN : pos;
     printf("Elbow: %d\n", pos);
-    bicep->SetVelocitySetpoint(vel);
-    bicep->SetPositionSetpoint(pos);
+    elbow->SetVelocitySetpoint(vel);
+    elbow->SetPositionSetpoint(pos);
     pos_elbow = pos;
 }
 
@@ -51,8 +51,8 @@ void Arm::SetWrist(int pos, int vel){
     pos = pos > WRIST_MAX ? WRIST_MAX : pos;
     pos = pos < WRIST_MIN ? WRIST_MIN : pos;
     printf("Wrist: %d\n", pos);
-    elbow->SetVelocitySetpoint(vel);
-    elbow->SetPositionSetpoint(pos);
+    wrist->SetVelocitySetpoint(vel);
+    wrist->SetPositionSetpoint(pos);
     pos_elbow = pos;
 }
 
@@ -83,28 +83,20 @@ void Arm::GrabCup() {
     SetClaw(pose_grabbing[3], 800);
 }
 
-void Arm::LivePose() {
-    int shoulder, elbow, wrist, claw;
-    std::cout << "Shoulder? ";
-    std::cin >> shoulder;
-    
-    SetShoulder(shoulder, 1023);
- 
-    std::cout << "Elbow? ";
-    std::cin >> elbow;
-
-    SetElbow(elbow, 900);
-
-    std::cout << "Wrist? ";
-    std::cin >> wrist;
-
-    SetWrist(wrist, 1023);
-
-    std::cout << "Claw? ";
-    std::cin >> claw;
-
-    SetClaw(claw, 1023);
-
-    //Set(pos_shoulder, pos_elbow, pos_wrist, pos_claw, 1023);    
-    
+void Arm::SetPose(ArmPose pose) {
+    switch(pose) {
+        default: 
+        case ArmPose::DEFAULT:
+            SetDefaultPose();
+            break;
+        case ArmPose::READY:
+            SetReadyPose();
+            break;
+        case ArmPose::GRABBING:
+            SetGrabbingPose();
+            break;
+        case ArmPose::GRAB:
+            GrabCup();
+            break;
+    }
 }
