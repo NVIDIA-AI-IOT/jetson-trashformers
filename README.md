@@ -2,13 +2,11 @@
 
 **The code in this repository has only been tested on the NVIDIA Jetson TX2.**
 <p align="center">
-  <img src="https://github.com/shruthij28/jetson-trashformers/blob/master/images/robot.jpg" width="300" height="500">
+  <img src="https://github.com/nvidia-jetson/jetson-trashformers/blob/master/images/our_robot.jpg" />
 </p>
 
 ### What is this project about?
 Our project uses neural networks to train the [Robotis BioloidGP](http://en.robotis.com/index/product.php?cate_code=121510) to detect trash and throw it away in trash cans, effectively keeping the office environment clean. The purpose of this project is to provide a use-case example for developers who may wish to use the Jetson platform. 
-
-<!-- add image after resizing![Robot Pic](https://github.com/shruthij28/jetson-trashformers/blob/master/images/robot.jpg) -->
 
 ### How can I run this project?
 ```
@@ -23,13 +21,13 @@ The first three commands clone and compile the program. The last command runs a 
 CupNet is the neural network that we have created in order to detect cups. It has been trained on images of cups in multiple colors, as well as false positives to make the model more accurate. This neural network has been created and trained on [NVIDIA DIGITS](https://developer.nvidia.com/digits) using the Caffe framework. We used the help of [Dustin Franklin's Jetson Inference tutorial](https://github.com/dusty-nv/jetson-inference) to learn more about using DIGITS and creating our own neural network.
 
 <p align="center">
-  <img src="https://github.com/shruthij28/jetson-trashformers/blob/master/images/model26.png" width="500">
+  <img src="https://github.com/nvidia-jetson/jetson-trashformers/blob/master/images/model26.png" width="500">
 </p>
 
 > This graph shows the model's statistics during the training period.
 
 <p align="center">
-  <img src="https://github.com/shruthij28/jetson-trashformers/blob/master/images/cup_tweet.png" width="500">
+  <img src="https://github.com/nvidia-jetson/jetson-trashformers/blob/master/images/cup_tweet.png" width="500">
 </p>
 
 > The model learns to draw bounding boxes around cups through training. 
@@ -54,7 +52,7 @@ See 'lib' folder for the specific files.
   * A shared object library to control robot commands via [ZigBee](http://support.robotis.com/en/software/zigbee_sdk/zig2serial/linux.htm). 
 
 <p align="center">
-  <img src="https://github.com/shruthij28/jetson-trashformers/blob/master/images/teampic.jpg" width="500">
+  <img src="https://github.com/nvidia-jetson/jetson-trashformers/blob/master/images/teampic.jpg" width="500">
 </p>
 
 ## Authors
@@ -104,32 +102,3 @@ Source code available at http://support.robotis.com/en/software/zigbee_sdk/zig2s
 
 No license was found as of June 29 2017.
 </blockquote>
-
-
-<!-- <center><img src="https://github.com/shruthij28/jetson-trashformers/blob/master/images/teampic.jpg" width="500"></center> -->
-<!-- ![Team Pic](https://github.com/shruthij28/jetson-trashformers/blob/master/images/teampic.jpg =500x250) -->
-
-
-<!--
-### Add jetson-trashformers/lib to your library path
-We will soon figure out a better way to handle these paths. For now, manually add lib via the export command:
-```
-export LD_LIBRARY_PATH=lib:$LD_LIBRARY_PATH
-```
-
-### To build Zigbee.so files:
-
-For zgb, go to jetson-trashformers/util and run the commands:
-```
-g++ -c -fpic *.c
-g++ -shared -o libzgb.so *.o
-```
-then move the resulting .so file to jetson-trashformers/lib:
-```
-mv ./libzgb.so ../lib
-```
-
-### Add libraries from detectnet-camera / jetson-inference
-See the log.md file for instructions on how we got that to work. Imporoved instructions are in the works.
--->
-
