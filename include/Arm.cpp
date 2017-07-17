@@ -30,7 +30,6 @@ void Arm::SetShoulder(int pos, int vel){
     m_serialHandler->OpenDynamixelPort();
     pos = pos > SHOULDER_MAX ? SHOULDER_MAX : pos;
     pos = pos < SHOULDER_MIN ? SHOULDER_MIN : pos;
-    printf("Shoulder: %d\n", pos);
     shoulder->SetVelocitySetpoint(vel);
     shoulder->SetPositionSetpoint(pos);
     pos_shoulder = pos;
@@ -40,7 +39,6 @@ void Arm::SetElbow(int pos, int vel){
     m_serialHandler->OpenDynamixelPort();
     pos = pos > ELBOW_MAX ? ELBOW_MAX : pos;
     pos = pos < ELBOW_MIN ? ELBOW_MIN : pos;
-    printf("Elbow: %d\n", pos);
     elbow->SetVelocitySetpoint(vel);
     elbow->SetPositionSetpoint(pos);
     pos_elbow = pos;
@@ -50,7 +48,6 @@ void Arm::SetWrist(int pos, int vel){
     m_serialHandler->OpenDynamixelPort();
     pos = pos > WRIST_MAX ? WRIST_MAX : pos;
     pos = pos < WRIST_MIN ? WRIST_MIN : pos;
-    printf("Wrist: %d\n", pos);
     wrist->SetVelocitySetpoint(vel);
     wrist->SetPositionSetpoint(pos);
     pos_elbow = pos;
@@ -60,7 +57,6 @@ void Arm::SetClaw(int pos, int vel){
     m_serialHandler->OpenDynamixelPort();
     pos = pos > CLAW_MAX ? CLAW_MAX : pos;
     pos = pos < CLAW_MIN ? CLAW_MIN : pos;    
-    printf("Claw: %d\n", pos);
     claw->SetVelocitySetpoint(vel);
     claw->SetPositionSetpoint(pos);
     pos_claw = pos;
