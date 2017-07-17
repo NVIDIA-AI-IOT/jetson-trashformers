@@ -12,19 +12,19 @@
 class KeyboardController{
     public:
         KeyboardController(ZigbController* zigb);
-    
+
         virtual ~KeyboardController();
 
         void Init();
         void RunInput();
         void Terminate();
 
-        
+
     private:
         ZigbController *zigb;
         struct termios old_tio, new_tio;
         unsigned char c;
-        
+
 };
 
 #endif //KEYBOARDCONTROLLER_H_

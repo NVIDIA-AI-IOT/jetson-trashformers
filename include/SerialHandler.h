@@ -9,20 +9,20 @@
 class SerialHandler {
 
     public:
-          
+
         SerialHandler();
         virtual ~SerialHandler();
-        
+
         int OpenZigbPort();
         int OpenDynamixelPort();
 
         ZigbController* GetZigbController();
         dynamixel::PortHandler* GetDynamixelPortHandler();
-        
+
     private:
-        
+
         ZigbController* zigb;
         dynamixel::PortHandler* portHandler;
-  
+
 };
 #endif

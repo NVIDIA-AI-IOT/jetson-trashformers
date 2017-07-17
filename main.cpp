@@ -8,7 +8,7 @@
 int main (int argc, char** argv){
     Humanoid* humanoid = new Humanoid(argc, argv);
     int inputChar; 
-       
+
     //Send STOP command to init zigbeecontroller
     humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
     
@@ -25,18 +25,18 @@ int main (int argc, char** argv){
     int areaTolerance = 0.50 * humanoid->detectnetController->GetCameraWidth() * humanoid->detectnetController->GetCameraHeight();
 
 
-    bool bendDown = false;
+    bool grab = false;
     //while((inputChar = getchar()) != 27){
     while(!humanoid->detectnetController->ReadStopSignal()){
         humanoid->detectnetController->SortBBArrayByTargetDistance();
         printf("Orientation: %i\n", humanoid->detectnetController->GetCupOrientation());
-        
+
         float xError = humanoid->detectnetController->GetErrorXOfTargetBB();
         float bbArea = humanoid->detectnetController->GetAreaOfTargetBB(); 
 
         printf("AREA: %f\n", bbArea);
         if(xError == NULL || bbArea == -1) {
-            if(bendDown){
+            if(grab){
                 humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::WALK_FORWARD);
                 humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
                 humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STRAFE_LEFT);
@@ -50,8 +50,8 @@ int main (int argc, char** argv){
                 break;
             }
             else {
-               printf("XERROR DNE | STOP\n"); 
-               humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
+                printf("XERROR DNE | STOP\n"); 
+                humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
             }
         } else if(xError >= xReactionTolerance) {
             printf("YERROR: %f | TURNING RIGHT\n", xError);
@@ -69,11 +69,11 @@ int main (int argc, char** argv){
         } 
 
         if(humanoid->detectnetController->bbArraySorted.size() < 1){
-            bendDown = false; 
+            grab = false; 
             printf("SETTING FALSE");
         }
         else if( humanoid->detectnetController->GetCenterYFromBB(humanoid->detectnetController->bbArraySorted[0]) > ((2.0/3.0) * humanoid->detectnetController->GetCameraHeight()) ){
-            bendDown = true; 
+            grab = true; 
             printf("SETTING TRUE");
             printf("CENTER Y of BB: %f\n", humanoid->detectnetController->GetCenterYFromBB(humanoid->detectnetController->bbArraySorted[0]) );
             printf("image threshold: %f\n", ((2.0/3.0) * humanoid->detectnetController->GetCameraHeight()) );

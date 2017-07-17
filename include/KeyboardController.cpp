@@ -21,7 +21,7 @@ void KeyboardController::RunInput(){
         //zigb->Stop();
         c = getchar();
         //printf("%d \n", c);
-        
+
         if(c == ' '){
             printf("Stopping!\n");
             zigb->Stop(); 

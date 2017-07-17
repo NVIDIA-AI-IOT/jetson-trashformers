@@ -20,7 +20,7 @@ class DetectNetController {
         //Structure of Bounding Box: [x1][y1][x2][y2] (bottom left: x1, y1; top right: x2, y2)
         std::vector<float*> SortBBArrayByTargetDistance();
         std::vector<float*> bbArraySorted;
-        
+
         //Thread Control Functions 
         void JoinDetectThread();
 
@@ -46,11 +46,11 @@ class DetectNetController {
         float GetErrorYOfTargetBB();
 
         enum class CupOrientation {
-            VERTICAL=0,
-            HORIZONTAL=1,
-            UKNOWN=2
+                VERTICAL=0,
+                HORIZONTAL=1,
+                UKNOWN=2
         };
-    
+
         DetectNetController::CupOrientation GetCupOrientation();
 
     private:

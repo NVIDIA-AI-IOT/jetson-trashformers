@@ -1,10 +1,10 @@
 #include "Servo.h"
 
 Servo::Servo(int dxl_id, dynamixel::PortHandler* portHandler) {
-	m_dxl_id = dxl_id;
-	//m_devicename = "/dev/ttyUSB0";
+    m_dxl_id = dxl_id;
+    //m_devicename = "/dev/ttyUSB0";
     m_portHandler = portHandler;
-	packetHandler = dynamixel::PacketHandler::getPacketHandler(PROTOCOL_VERSION);
+    packetHandler = dynamixel::PacketHandler::getPacketHandler(PROTOCOL_VERSION);
 }
 
 Servo::~Servo() {
@@ -19,32 +19,32 @@ int Servo::Enable(bool enable) {
     if( CheckError() ) {
         return -1;
     }
-    
+
     return 0;
 }
 
 
 void Servo::SetSafeTorque() {
-    
-   dxl_comm_result = packetHandler->write2ByteTxRx(m_portHandler, m_dxl_id, ADDR_MX_GOAL_TORQUE, 340, &dxl_error);
+
+    dxl_comm_result = packetHandler->write2ByteTxRx(m_portHandler, m_dxl_id, ADDR_MX_GOAL_TORQUE, 340, &dxl_error);
 
 }
 
 int Servo::SetPositionSetpoint(uint16_t setpoint) {
     Enable(true);
     dxl_comm_result = packetHandler->write2ByteTxRx(m_portHandler, m_dxl_id, ADDR_MX_GOAL_POSITION, setpoint, &dxl_error);
-    
-   if( CheckError() ) {
+
+    if( CheckError() ) {
         return -1;
-   }
-    
-   return 0;
+    }
+
+    return 0;
 }
 
 int Servo::GetPosition() {
 
     dxl_comm_result = packetHandler->read2ByteTxRx(m_portHandler, m_dxl_id, ADDR_MX_PRESENT_POSITION, &dxl_present_position, &dxl_error);
-    
+
     if( CheckError() ) {
         return -1;
     }
@@ -55,12 +55,12 @@ int Servo::GetPosition() {
 int Servo::SetVelocitySetpoint(uint16_t setpoint) {
     Enable(true);
     dxl_comm_result = packetHandler->write2ByteTxRx(m_portHandler, m_dxl_id, ADDR_MX_GOAL_SPEED, setpoint, &dxl_error);
-    
-   if( CheckError() ) {
+
+    if( CheckError() ) {
         return -1;
-   }
-    
-   return 0;
+    }
+
+    return 0;
 }
 
 

@@ -8,7 +8,7 @@
 class BehaviorController {
 
     public:
-        
+
         enum class ControllerState {
             WALK_FORWARD,
             WALK_BACKWARD,
@@ -16,11 +16,11 @@ class BehaviorController {
             TURN_LEFT,
             STRAFE_LEFT,
             STRAFE_RIGHT,
-	    DIAGONAL_RIGHT,
-	    DIAGONAL_LEFT, 
-	    BEND_DOWN,
+            DIAGONAL_RIGHT,
+            DIAGONAL_LEFT, 
+            BEND_DOWN,
             STOP
-            
+
         };
 
 
@@ -28,8 +28,8 @@ class BehaviorController {
         virtual ~BehaviorController();
 
         void ChangeState(ControllerState state);
-        
-        
+
+
     private:
         ZigbController* m_zigb;
         SerialHandler* m_serialHandler;

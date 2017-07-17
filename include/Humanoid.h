@@ -18,43 +18,14 @@ class Humanoid {
     public:
         Humanoid(int argc, char** argv);
         virtual ~Humanoid();
-        
+
         double GetCupCenterY();
         double GetCupCenterX();
 
         void UseKeyboard();
-        
-        //Movement commands through Zigbee
-        void Stop();
-        
-        void WalkForward();
-        void WalkBackward();
 
-        void TurnLeft();
-        void TurnRight();
-
-        void WalkForwardLeft();
-        void WalkForwardRight();
-
-        void SidestepLeft();
-        void SidestepRight();
-
-        void FastSidestepLeft();
-        void FastSidestepRight();
-
-        void StepDiagonalFrontalLeft();
-        void StepDiagonalFrontalRight();
-
-        void StepDiagonalDorsalLeft();
-        void StepDiagonalDorsalRight();
-
-        void GetUpFacingUp();
-        void GetUpFacingDown();
-
-        Servo* motor_1;
         SerialHandler* serialHandler;
         Arm* arm;
-        Head* head;
         DetectNetController* detectnetController;
         BehaviorController* behaviorController; 
     private:

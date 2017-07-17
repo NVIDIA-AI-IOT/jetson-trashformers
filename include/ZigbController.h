@@ -13,7 +13,7 @@ class ZigbController {
         ZigbController();
         ZigbController(int device_index);
         virtual ~ZigbController();
-        
+
         int ConnectZigbee();
         int SendCommand(int data);
         int Stop();
@@ -21,7 +21,7 @@ class ZigbController {
 
     private:
         int m_device_index;
-        
+
 };
 
 #endif
