@@ -1,6 +1,6 @@
 # Jetson Trashformers
 
-**The code in this repository has only been tested NVIDIA Jetson TX2.**
+**The code in this repository has only been tested on the NVIDIA Jetson TX2.**
 <p align="center">
   <img src="https://github.com/shruthij28/jetson-trashformers/blob/master/images/robot.jpg" width="300" height="500">
 </p>
