@@ -3,7 +3,7 @@
 SerialHandler::SerialHandler() {
     zigb = new ZigbController();
     portHandler = dynamixel::PortHandler::getPortHandler(DEVICENAME_DEFAULT);
-    
+
 }
 
 SerialHandler::~SerialHandler() {

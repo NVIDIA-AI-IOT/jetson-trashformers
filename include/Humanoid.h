@@ -15,22 +15,22 @@
 #include "BehaviorController.h"
 
 class Humanoid {
-public:
-    Humanoid(int argc, char** argv);
-    virtual ~Humanoid();
+    public:
+        Humanoid(int argc, char** argv);
+        virtual ~Humanoid();
 
-    double GetCupCenterY();
-    double GetCupCenterX();
+        double GetCupCenterY();
+        double GetCupCenterX();
 
-    void UseKeyboard();
+        void UseKeyboard();
 
-    SerialHandler* serialHandler;
-    Arm* arm;
-    DetectNetController* detectnetController;
-    BehaviorController* behaviorController; 
-private:
-    ZigbController* zigb;
-    KeyboardController* keyboardController;
+        SerialHandler* serialHandler;
+        Arm* arm;
+        DetectNetController* detectnetController;
+        BehaviorController* behaviorController; 
+    private:
+        ZigbController* zigb;
+        KeyboardController* keyboardController;
 };
 
 #endif // HUMANOID_H_
