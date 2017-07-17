@@ -47,7 +47,7 @@ int main (int argc, char** argv){
                 sleep(2);
                 humanoid->arm->SetPose(Arm::ArmPose::DEFAULT);
                 humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
-                bendDown = false; 
+                grab = false; 
             }
             else {
                printf("STOP\n"); 
