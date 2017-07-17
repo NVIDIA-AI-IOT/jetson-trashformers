@@ -33,6 +33,14 @@ CupNet is the neural network that we have created in order to detect cups. It ha
 
 > The model learns to draw bounding boxes around cups through training. 
 
+### Hardware Expectations?
+* Robotis BioloidGP
+* Orbitty Carrier Board
+* Jetson TX2
+* Logitech C270 Webcam
+* USB2Dynamixel
+* Zig2Serial
+
 ### Licensing?
 * ROBOTIS:
 <blockquote>
