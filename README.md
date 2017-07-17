@@ -1,11 +1,12 @@
-# Jetson-Trashformers
+# Jetson Trashformers
 
+**The code in this repository has only been tested NVIDIA Jetson TX2.**
 <p align="center">
   <img src="https://github.com/shruthij28/jetson-trashformers/blob/master/images/robot.jpg" width="300" height="500">
 </p>
 
 ### What is this project about?
-The goal of this project is to use neural networks to train the [Robotis BioloidGP](http://en.robotis.com/index/product.php?cate_code=121510) to detect trash and throw it away in trash cans, effectively keeping the office environment clean. 
+Our project uses neural networks to train the [Robotis BioloidGP](http://en.robotis.com/index/product.php?cate_code=121510) to detect trash and throw it away in trash cans, effectively keeping the office environment clean. The purpose of this project is to provide a use-case example for developers who may wish to use the Jetson platform. 
 
 <!-- add image after resizing![Robot Pic](https://github.com/shruthij28/jetson-trashformers/blob/master/images/robot.jpg) -->
 
@@ -16,7 +17,7 @@ cd jetson-trashformers
 make
 sh runDetect.sh
 ```
-These three commands will clone the project to the computer so that it can be run and/or edited to the the user's liking, compile the program, and allow the user to run the program to pick up trash. This program can only be run on the Jetson TX2.
+The first three commands clone and compile the program. The last command runs a script which starts the program. **This program can only be run on the Jetson TX2.**
 
 ### What is CupNet?
 CupNet is the neural network that we have created in order to detect cups. It has been trained on images of cups in multiple colors, as well as false positives to make the model more accurate. This neural network has been created and trained on [NVIDIA DIGITS](https://developer.nvidia.com/digits) using the Caffe framework. We used the help of [Dustin Franklin's Jetson Inference tutorial](https://github.com/dusty-nv/jetson-inference) to learn more about using DIGITS and creating our own neural network.
@@ -41,7 +42,28 @@ CupNet is the neural network that we have created in order to detect cups. It ha
 * USB2Dynamixel
 * Zig2Serial
 
-### Licensing?
+### Libraries Used
+See 'lib' folder for the specific files. 
+* libdetectnet-camera.so <!-- Rename with the new name for DetectNet Camera-->
+  * A shared object library with an edited and compiled version of detectnet-camera.cpp from [Dustin's github](https://github.com/dusty-nv/jetson-inference).
+* libdxl_sbc_cpp.so
+  * A shared object library for the [Dynamixel servos](https://github.com/ROBOTIS-GIT/DynamixelSDK).
+* libjetson-inference.so
+  * A shared object library of [Dustin's jetson-inference](https://github.com/dusty-nv/jetson-inference).
+* libzgb.so
+  * A shared object library to control robot commands via [ZigBee](http://support.robotis.com/en/software/zigbee_sdk/zig2serial/linux.htm). 
+
+<p align="center">
+  <img src="https://github.com/shruthij28/jetson-trashformers/blob/master/images/teampic.jpg" width="500">
+</p>
+
+## Authors
+* Ishan Mitra
+* Shruthi Jaganathan
+* Mark Theis 
+* Michael Chacko
+
+### Licenses Used
 * ROBOTIS:
 <blockquote>
 SDK OBTAINED FROM https://github.com/ROBOTIS-GIT/DynamixelSDK
@@ -83,27 +105,6 @@ Source code available at http://support.robotis.com/en/software/zigbee_sdk/zig2s
 No license was found as of June 29 2017.
 </blockquote>
 
-
-### Libraries?
-See 'lib' folder for the specific files. 
-* libdetectnet-camera.so <!-- Rename with the new name for DetectNet Camera-->
-  * A shared object library with an edited and compiled version of detectnet-camera.cpp from [Dustin's github](https://github.com/dusty-nv/jetson-inference).
-* libdxl_sbc_cpp.so
-  * A shared object library for the [Dynamixel servos](https://github.com/ROBOTIS-GIT/DynamixelSDK).
-* libjetson-inference.so
-  * A shared object library of [Dusty's jetson-inference](https://github.com/dusty-nv/jetson-inference).
-* libzgb.so
-  * A shared object library to control robot commands via [ZigBee](http://support.robotis.com/en/software/zigbee_sdk/zig2serial/linux.htm). 
-
-<p align="center">
-  <img src="https://github.com/shruthij28/jetson-trashformers/blob/master/images/teampic.jpg" width="500">
-</p>
-
-## Authors
-* Ishan Mitra
-* Shruthi Jaganathan
-* Mark Theis 
-* Michael Chacko
 
 <!-- <center><img src="https://github.com/shruthij28/jetson-trashformers/blob/master/images/teampic.jpg" width="500"></center> -->
 <!-- ![Team Pic](https://github.com/shruthij28/jetson-trashformers/blob/master/images/teampic.jpg =500x250) -->
