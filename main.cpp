@@ -47,7 +47,11 @@ int main (int argc, char** argv){
                 humanoid->arm->SetPose(Arm::ArmPose::GRABBING);
                 sleep(1);
                 humanoid->arm->SetPose(Arm::ArmPose::GRAB);
-                break;
+
+                sleep(2);
+                humanoid->arm->SetPose(Arm::ArmPose::DEFAULT);
+                humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
+                bendDown = false; 
             }
             else {
                printf("XERROR DNE | STOP\n"); 
