@@ -120,11 +120,11 @@ int runDetectNet( int argc, char** argv )
 	printf("   height:  %u\n", camera->GetHeight());
 	printf("    depth:  %u (bpp)\n\n", camera->GetPixelDepth());
 	
-
+    
 	/*
 	 * create detectNet
 	 */
-	detectNet* net = detectNet::Create(argc, argv);
+	detectNet* net = detectNet::Create("networks/deploy.prototxt", "networks/snapshot_iter_84.caffemodel", "networks/mean.binaryproto");
 	
 	if( !net )
 	{
