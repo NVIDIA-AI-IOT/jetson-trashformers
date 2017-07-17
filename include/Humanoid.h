@@ -11,7 +11,6 @@
 #include "Arm.h"
 #include "Servo.h"
 #include "SerialHandler.h"
-#include "Head.h"
 #include "BehaviorController.h"
 
 class Humanoid {

@@ -122,16 +122,16 @@ float DetectNetController::GetCenterYFromBB(float* bb) {
 
 float DetectNetController::GetErrorXOfTargetBB() {
     const float offset = (1.0/4.0) * (GetCameraWidth());
-    if(bbArraySorted.size() < 1) return NULL;
+    if(bbArraySorted.size() < 1) return 0.0; //used to be NULL
     float cX = GetCenterXFromBB(bbArraySorted[0]);
-    if(cX == -1) return NULL;
+    if(cX == -1) return 0.0;
     return cX - GetCameraCenterX() - offset; 
 }
 
 float DetectNetController::GetErrorYOfTargetBB() {
-    if(bbArraySorted.size() < 1) return NULL;
+    if(bbArraySorted.size() < 1) return 0.0; //used to be NULL
     float cY = GetCenterYFromBB(bbArraySorted[0]);
-    if(cY == -1) return NULL;
+    if(cY == -1) return 0.0;
     return cY - GetCameraCenterY(); 
 }
 
@@ -162,7 +162,7 @@ float DetectNetController::GetCameraCenterY(){
 
 DetectNetController::CupOrientation DetectNetController::GetCupOrientation(){
     float* targetCup = GetTargetBB();
-    if(targetCup == NULL) return CupOrientation::UKNOWN;
+    if(targetCup == nullptr) return CupOrientation::UKNOWN;
     float width = targetCup[2] - targetCup[0];
     float height = targetCup[3] - targetCup[1];
     if(width > height) return CupOrientation::HORIZONTAL;

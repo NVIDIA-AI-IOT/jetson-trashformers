@@ -4,11 +4,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <thread>
-#include <stdint.h>
-#include <math.h>
 #include <algorithm>
-#include <functional>
-#include <array>
 #include <vector>
 #include "../util/detectnet-camera.h"
 

@@ -2,12 +2,10 @@
 #include "include/BehaviorController.h"
 #include "include/Arm.h"
 #include <iostream>
-#include <signal.h>
 #include <thread>
 
 int main (int argc, char** argv){
     Humanoid* humanoid = new Humanoid(argc, argv);
-    int inputChar; 
 
     //Send STOP command to init zigbeecontroller
     humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
@@ -31,7 +29,7 @@ int main (int argc, char** argv){
         float xError = humanoid->detectnetController->GetErrorXOfTargetBB();
         float bbArea = humanoid->detectnetController->GetAreaOfTargetBB(); 
 
-        if(xError == NULL || bbArea == -1) {
+        if(bbArea == -1) {
             if(grab){
                 humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::WALK_FORWARD);
                 humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
@@ -54,17 +52,17 @@ int main (int argc, char** argv){
                humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
             }
         } else if(xError >= xReactionTolerance) {
-            printf("TURNING RIGHT\n", xError);
+            printf("TURNING RIGHT\n");
             humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STRAFE_RIGHT);
         } else if(xError <= (xReactionTolerance)*-1) {
-            printf("TURNING LEFT\n", xError);
+            printf("TURNING LEFT\n");
             humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STRAFE_LEFT);
         } else if(bbArea <= areaTolerance){
-            printf("WALKING FORWARD\n", bbArea);
+            printf("WALKING FORWARD\n");
             humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::WALK_FORWARD);
             humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
         } else {
-            printf("STOP DUE TO LARGE AREA\n", xError);
+            printf("STOP DUE TO LARGE AREA\n");
             humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
         } 
 
