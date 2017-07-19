@@ -56,10 +56,10 @@ See 'lib' folder for the specific files.
 </p>
 
 ## Authors
-* Ishan Mitra
+* Michael Chacko
 * Shruthi Jaganathan
 * Mark Theis 
-* Michael Chacko
+* Ishan Mitra
 
 ### Licenses Used
 * ROBOTIS:
