@@ -47,7 +47,7 @@ class Arm {
         int pos_shoulder, pos_elbow, pos_wrist, pos_claw;
         int pose_default[4] = {342, 572, 762, 610};   
         int pose_ready[4] = {650, 700, 350, 220};
-        int pose_grabbing[4] = {650, 480, 250, 530};
+        int pose_grabbing[4] = {650, 480, 250, 540};
         
         void SetDefaultPose();
         void SetReadyPose();
