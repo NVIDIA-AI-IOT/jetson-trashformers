@@ -56,6 +56,7 @@ See 'lib' folder for the specific files.
 </p>
 
 ## Authors
+(left to right from above picture)
 * Ishan Mitra
 * Shruthi Jaganathan
 * Mark Theis 
