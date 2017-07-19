@@ -33,6 +33,7 @@ int main (int argc, char** argv){
             if(grab){
                 humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::WALK_FORWARD);
                 humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
+                sleep(1);
                 humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STRAFE_LEFT);
                 printf("BEND DOWN\n"); 
                 sleep(1);
