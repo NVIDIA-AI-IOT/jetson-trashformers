@@ -23,6 +23,10 @@ class Humanoid {
 
         void UseKeyboard();
 
+        void UpdateState(int xReactionTolerance, int areaTolerance);
+        
+        void GrabVerticalCup();
+        
         SerialHandler* serialHandler;
         Arm* arm;
         DetectNetController* detectnetController;
@@ -30,6 +34,7 @@ class Humanoid {
     private:
         ZigbController* zigb;
         KeyboardController* keyboardController;
+        bool grab = false;
 };
 
 #endif // HUMANOID_H_
