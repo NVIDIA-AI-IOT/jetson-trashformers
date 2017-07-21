@@ -15,7 +15,7 @@
 
 class Humanoid {
     public:
-        Humanoid(int argc, char** argv);
+        Humanoid(std::string model);
         virtual ~Humanoid();
 
         double GetCupCenterY();

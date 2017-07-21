@@ -6,16 +6,19 @@
 #include <thread>
 #include <algorithm>
 #include <vector>
+#include <string>
 #include "../util/detectnet-camera.h"
 
 class DetectNetController {
     public:
-        DetectNetController(int argc, char** argv);
+        DetectNetController(std::string model);
         virtual ~DetectNetController();
 
-        //Structure of Bounding Box: [x1][y1][x2][y2] (bottom left: x1, y1; top right: x2, y2)
-        std::vector<float*> SortBBArrayByTargetDistance();
-        std::vector<float*> bbArraySorted;
+        //Structure of Unsorted Bounding Box: [x1][y1][x2][y2] (bottom left: x1, y1; top right: x2, y2)
+
+        //Structure of Sorted Bounding Box: [x1][y1][x2][y2] (bottom left: x1, y1; top right: x2, y2), ClassID
+        std::vector<std::array<float, 5>> SortBBArrayByTargetDistance();
+        std::vector<std::array<float, 5>> bbArraySorted;
 
         //Thread Control Functions 
         void JoinDetectThread();
@@ -26,8 +29,8 @@ class DetectNetController {
         volatile int* ReadNumberOfDetectedBB();
         bool ReadStopSignal();
 
-        float GetCenterXFromBB(float* bb);
-        float GetCenterYFromBB(float* bb);
+        float GetCenterXFromBB(std::array<float, 5> bb);
+        float GetCenterYFromBB(std::array<float, 5> bb);
         bool IsDetectNetReady();
         void SetCameraPort(int source);
 
@@ -36,10 +39,12 @@ class DetectNetController {
         float GetCameraCenterX();
         float GetCameraCenterY();
 
-        float* GetTargetBB();
+        std::array<float, 5> GetTargetBB();
         float GetAreaOfTargetBB();
         float GetErrorXOfTargetBB();
         float GetErrorYOfTargetBB();
+        int GetClassIDFromUnsortedBBNum(int bbNum);
+    
 
         enum class CupOrientation {
                 VERTICAL=0,
@@ -50,6 +55,8 @@ class DetectNetController {
         DetectNetController::CupOrientation GetCupOrientation();
 
     private:
+        float* GetConfCPU();
+
         float** bbArrayUnsorted;
         volatile int numberOfDetectedBB;
 
@@ -66,8 +73,7 @@ class DetectNetController {
         std::thread* detectNetThread;
 
         //Arguments
-        int m_argc;
-        char** m_argv;
+        std::string m_model;
 };
 
 #endif

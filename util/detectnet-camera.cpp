@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <signal.h>
 #include <unistd.h>
+#include <string>
 
 #include "cudaMappedMemory.h"
 #include "cudaNormalize.h"
@@ -25,6 +26,7 @@ bool signal_recieved = false;
 float* bb = NULL;
 float** boxes = NULL;
 int numBoundingBoxes = 0;
+float* currentConfCPU = NULL;
 int actualNumBB = 0;
 uint32_t camera_Height = 0;
 uint32_t camera_Width = 0;
@@ -53,6 +55,10 @@ float** getBoundingBoxArray(){
     return boxes;
 }
 
+float* getConfCPU(){
+    return currentConfCPU;
+}
+
 int *getNumBoundingBox(){
     return &actualNumBB;
 }
@@ -70,13 +76,13 @@ uint32_t getCameraWidth(){
 }
 
 int main(int argc, char** argv){
-    runDetectNet(argc, argv);
+    //runDetectNet(argc);
 }
 
 
-int runDetectNet( int argc, char** argv )
+int runDetectNet( std::string modelNum )
 {
-	printf("detectnet-camera\n  args (%i):  ", argc);
+/*	printf("detectnet-camera\n  args (%i):  ", argc);
 
 	for( int i=0; i < argc; i++ )
 		printf("%i [%s]  ", i, argv[i]);
@@ -84,7 +90,7 @@ int runDetectNet( int argc, char** argv )
 	printf("\n\n");
 	
 
-	/*
+	*//*
 	 * parse network type from CLI arguments
 	 */
 	/*detectNet::NetworkType networkType = detectNet::PEDNET_MULTI;
@@ -120,11 +126,11 @@ int runDetectNet( int argc, char** argv )
 	printf("   height:  %u\n", camera->GetHeight());
 	printf("    depth:  %u (bpp)\n\n", camera->GetPixelDepth());
 	
-    
+    std::string network = "networks/snapshot_iter_" + modelNum + ".caffemodel"; 
 	/*
 	 * create detectNet
 	 */
-	detectNet* net = detectNet::Create("networks/deploy.prototxt", "networks/snapshot_iter_84.caffemodel", "networks/mean.binaryproto");
+	detectNet* net = detectNet::Create("networks/deploy.prototxt", network.c_str(), "networks/mean.binaryproto");
 	
 	if( !net )
 	{
@@ -219,6 +225,7 @@ int runDetectNet( int argc, char** argv )
 		{
 		//	printf("%i bounding boxes detected EDITED\n", numBoundingBoxes);
             actualNumBB = numBoundingBoxes;
+            currentConfCPU = confCPU;
 		
 			int lastClass = 0;
 			int lastStart = 0;
