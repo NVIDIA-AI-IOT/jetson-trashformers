@@ -1,10 +1,10 @@
 #include "DetectNetController.h"
 
-DetectNetController::DetectNetController(std::string model){
+DetectNetController::DetectNetController(int camPort, std::string model){
     //Run the DetectNet Program
     m_model = model;
     
-    SetCameraPort(0);
+    SetCameraPort(camPort);
     detectNetThread = new std::thread(&DetectNetController::runThread, this);
 }
 
@@ -44,12 +44,10 @@ std::vector<std::array<float, 5>> DetectNetController::SortBBArrayByTargetDistan
         int boxNum = 0; //used to keep track of which box we are on in the unsorted bb array 
         for(int i=0; i<numberOfDetectedBB * 4; i+=4){
             float* bb = bbArrayUnsorted[0];
-            int classID = GetClassIDFromUnsortedBBNum(boxNum);
-            std::array<float, 5> arr = { bb[i], bb[i+1], bb[i+2], bb[i+3], classID};
-            //float* arrptr = arr;
+            std::array<float, 5> arr = { bb[i], bb[i+1], bb[i+2], bb[i+3], (float)GetClassIDFromUnsortedBBNum(boxNum)};
             bbArraySorted.push_back(arr);
  
-            printf("BB #%i: (X1: %f, Y1: %f), (X2:%f, Y2: %f), classID: %i\n", boxNum, arr[0], arr[1], arr[2], arr[3], classID);
+            //printf("BB #%i: (X1: %f, Y1: %f), (X2:%f, Y2: %f), classID: %i\n", boxNum, arr[0], arr[1], arr[2], arr[3], classID);
             boxNum++;
         }
 

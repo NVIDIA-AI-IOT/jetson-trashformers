@@ -15,7 +15,7 @@
 
 class Humanoid {
     public:
-        Humanoid(std::string model);
+        Humanoid(int camPort, std::string model);
         virtual ~Humanoid();
 
         double GetCupCenterY();
