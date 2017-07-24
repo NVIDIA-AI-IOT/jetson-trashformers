@@ -19,7 +19,6 @@
 #define TORQUE_ENABLE 1
 #define TORQUE_DISABLE 0
 
-#define DEVICENAME_DEFAULT "/dev/ttyUSB0"
 class Servo {
     public:				
         Servo(int dxl_id, dynamixel::PortHandler* portHandler);

@@ -4,7 +4,7 @@
 #include "ZigbController.h"
 #include "../util/dynamixel_sdk.h"
 
-#define DEVICENAME_DEFAULT "/dev/ttyUSB0"
+#define DEVICENAME_DEFAULT "/dev/ttyACM0"
 
 class SerialHandler {
 
