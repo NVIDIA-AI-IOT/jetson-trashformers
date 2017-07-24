@@ -1,12 +1,11 @@
-# Jetson Trashformers
-
-**The code in this repository has only been tested on the NVIDIA Jetson TX2.**
 <p align="center">
-  <img src="https://github.com/nvidia-jetson/jetson-trashformers/blob/master/images/our_robot.jpg" />
+  <img src="https://github.com/NVIDIA-Jetson/jetson-trashformers/blob/master/images/trashformers_logo.png" />
 </p>
 
 ### What is this project about?
 Our project uses neural networks to train the [Robotis BioloidGP](http://en.robotis.com/index/product.php?cate_code=121510) to detect trash and throw it away in trash cans, effectively keeping the office environment clean. The purpose of this project is to provide a use-case example for developers who may wish to use the Jetson platform. 
+
+**The code in this repository has only been tested on the NVIDIA Jetson TX2.**
 
 ### How can I run this project?
 ```
@@ -39,6 +38,10 @@ CupNet is the neural network that we have created in order to detect cups. It ha
 * Logitech C270 Webcam
 * USB2Dynamixel
 * Zig2Serial
+
+<p align="center">
+  <img src="https://github.com/nvidia-jetson/jetson-trashformers/blob/master/images/our_robot.jpg" width="500">
+</p>
 
 ### Libraries Used
 See 'lib' folder for the specific files. 
