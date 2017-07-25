@@ -89,5 +89,5 @@ void Humanoid::GrabVerticalCup() {
     sleep(1);
     arm->SetPose(Arm::ArmPose::GRAB);
     sleep(2);
-    arm->SetPose(Arm::ArmPose::DEFAULT);
+    arm->SetPose(Arm::ArmPose::STORE);
 }

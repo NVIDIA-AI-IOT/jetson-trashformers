@@ -79,6 +79,10 @@ void Arm::GrabCup() {
     SetClaw(pose_grabbing[3], 800);
 }
 
+void Arm::SetStorePose() {
+    Set(pose_store[0], pose_store[1], pose_store[2], pose_store[3], 200);
+}
+
 void Arm::SetPose(ArmPose pose) {
     switch(pose) {
         default: 
@@ -93,6 +97,9 @@ void Arm::SetPose(ArmPose pose) {
             break;
         case ArmPose::GRAB:
             GrabCup();
+            break;
+        case ArmPose::STORE:
+            SetStorePose();
             break;
     }
 }

@@ -29,7 +29,8 @@ class Arm {
             DEFAULT,
             READY,
             GRABBING, 
-            GRAB
+            GRAB,
+            STORE
         };
 
         void Set(int pos_shoulder, int pos_elbow, int pos_wrist, int pos_claw, int vel_setpoint);
@@ -48,11 +49,14 @@ class Arm {
         int pose_default[4] = {342, 572, 762, 610};   
         int pose_ready[4] = {650, 700, 350, 220};
         int pose_grabbing[4] = {650, 480, 250, 540};
+        int pose_store[4] = {342, 572, 660, 540};
         
         void SetDefaultPose();
         void SetReadyPose();
         void SetGrabbingPose();
         void GrabCup(); 
+        void SetStorePose();
+
 };
 
 #endif //ARM_H_
