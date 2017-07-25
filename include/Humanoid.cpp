@@ -32,7 +32,7 @@ void Humanoid::UpdateState(int xReactionTolerance, int areaTolerance) {
 
     if(bbArea == -1) {
         if(grab){
-            behaviorController->ChangeState(BehaviorController::ControllerState::WALK_FORWARD);
+            behaviorController->ChangeState(BehaviorController::ControllerState::DIAGONAL_LEFT);
             behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
             behaviorController->ChangeState(BehaviorController::ControllerState::STRAFE_LEFT);
             printf("BEND DOWN\n"); 
@@ -53,7 +53,7 @@ void Humanoid::UpdateState(int xReactionTolerance, int areaTolerance) {
         behaviorController->ChangeState(BehaviorController::ControllerState::STRAFE_LEFT);
     } else if(bbArea <= areaTolerance){
         printf("WALKING FORWARD\n");
-        behaviorController->ChangeState(BehaviorController::ControllerState::WALK_FORWARD);
+        behaviorController->ChangeState(BehaviorController::ControllerState::DIAGONAL_LEFT);
         behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
     } else {
         printf("STOP DUE TO LARGE AREA\n");
