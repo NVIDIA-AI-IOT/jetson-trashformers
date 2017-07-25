@@ -12,6 +12,9 @@ int* getNumBoundingBox();
 bool getStopSignal();
 float* getConfCPU();
 
+bool getLoopLock();
+void setLoopLock(bool lockState);
+
 uint32_t getCameraHeight();
 uint32_t getCameraWidth();
 bool isCameraLoaded();

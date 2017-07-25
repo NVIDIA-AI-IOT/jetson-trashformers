@@ -33,6 +33,8 @@ uint32_t camera_Width = 0;
 bool cameraIsLoaded = false;
 int camera_source = -1;
 
+bool loopLock = false;
+
 void sig_handler(int signo)
 {
 	if( signo == SIGINT )
@@ -50,6 +52,13 @@ void setCameraPort(int source){
     camera_source = source;
 }
 
+bool getLoopLock(){
+    return loopLock; 
+}
+
+void setLoopLock(bool lockState){
+    loopLock = lockState;
+}
 
 float** getBoundingBoxArray(){
     return boxes;
@@ -205,6 +214,8 @@ int runDetectNet( std::string modelNum )
 	
 	while( !signal_recieved )
 	{
+        while(!loopLock){}
+
 		void* imgCPU  = NULL;
 		void* imgCUDA = NULL;
 		
@@ -297,9 +308,10 @@ int runDetectNet( std::string modelNum )
 				// draw the texture
 				texture->Render(100,100);		
 			}
-
+    
 			display->EndRender();
 		}
+       loopLock = false;
 	}
 	
 	printf("\ndetectnet-camera:  un-initializing video device\n");

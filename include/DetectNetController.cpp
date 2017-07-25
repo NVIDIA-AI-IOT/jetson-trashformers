@@ -104,6 +104,14 @@ bool DetectNetController::ReadStopSignal(){
     return getStopSignal();
 }
 
+bool DetectNetController::GetDetectNetLoopLock(){
+    return getLoopLock();
+}
+
+void DetectNetController::SetDetectNetLoopLock(bool state){
+    setLoopLock(state);
+}
+
 float DetectNetController::GetCenterXFromBB(std::array<float, 5> bb) {
     if(!bb.empty()){
         printf("GetCenterXFromBB: bb[0] = %0.0f, bb[2] = %0.0f \n", bb[0], bb[2]);

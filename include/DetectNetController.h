@@ -38,6 +38,9 @@ class DetectNetController {
         float GetCameraHeight();
         float GetCameraCenterX();
         float GetCameraCenterY();
+        
+        void SetDetectNetLoopLock(bool state);
+        bool GetDetectNetLoopLock();
 
         std::array<float, 5> GetTargetBB();
         float GetAreaOfTargetBB();
