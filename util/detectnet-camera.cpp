@@ -214,7 +214,8 @@ int runDetectNet( std::string modelNum )
 	
 	while( !signal_recieved )
 	{
-        while(!loopLock){}
+        while(!signal_recieved && !loopLock){   
+        }
 
 		void* imgCPU  = NULL;
 		void* imgCUDA = NULL;
