@@ -40,6 +40,7 @@ CupNet is the neural network that we have created in order to detect cups. It ha
 * Zig2Serial
 
 [Find a Hardware setup guide here](https://github.com/NVIDIA-Jetson/jetson-trashformers/wiki/Hardware)
+
 [Find a Linux 4 Tegra setup guide here](https://github.com/NVIDIA-Jetson/jetson-trashformers/wiki/Jetson%E2%84%A2-Flashing-and-Setup-Guide-for-a-Connect-Tech-Carrier-Board)
 
 <p align="center">
