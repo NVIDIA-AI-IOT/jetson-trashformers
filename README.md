@@ -3,9 +3,9 @@
 </p>
 
 ### What is this project about?
-Our project uses neural networks to train the [Robotis BioloidGP](http://en.robotis.com/index/product.php?cate_code=121510) to detect trash and throw it away in trash cans, effectively keeping the office environment clean. The purpose of this project is to provide a use-case example for developers who may wish to use the Jetson platform. 
+Our project uses neural networks to train the [Robotis BioloidGP](http://en.robotis.com/index/product.php?cate_code=121510) to detect trash and throw it away in trash cans, effectively keeping the office environment clean. The purpose of this project is to provide a use-case example for developers who may wish to use the Jetson™ platform. 
 
-**The code in this repository has only been tested on the NVIDIA Jetson TX2.**
+**The code in this repository has only been tested on the NVIDIA Jetson™ TX2.**
 
 ### How can I run this project?
 ```
@@ -14,10 +14,10 @@ cd jetson-trashformers
 make
 sh runDetect.sh
 ```
-The first three commands clone and compile the program. The last command runs a script which starts the program. **This program can only be run on the Jetson TX2.**
+The first three commands clone and compile the program. The last command runs a script which starts the program. **This program can only be run on the Jetson™ TX2.**
 
 ### What is CupNet?
-CupNet is the neural network that we have created in order to detect cups. It has been trained on images of cups in multiple colors, as well as false positives to make the model more accurate. This neural network has been created and trained on [NVIDIA DIGITS](https://developer.nvidia.com/digits) using the Caffe framework. We used the help of [Dustin Franklin's Jetson Inference tutorial](https://github.com/dusty-nv/jetson-inference) to learn more about using DIGITS and creating our own neural network.
+CupNet is the neural network that we have created in order to detect cups. It has been trained on images of cups in multiple colors, as well as false positives to make the model more accurate. This neural network has been created and trained on [NVIDIA DIGITS](https://developer.nvidia.com/digits) using the Caffe framework. We used the help of [Dustin Franklin's Jetson™ Inference tutorial](https://github.com/dusty-nv/jetson-inference) to learn more about using DIGITS and creating our own neural network.
 
 <p align="center">
   <img src="https://github.com/nvidia-jetson/jetson-trashformers/blob/master/images/model26.png" width="500">
@@ -33,15 +33,15 @@ CupNet is the neural network that we have created in order to detect cups. It ha
 
 ### Hardware Expectations?
 * Robotis BioloidGP
-* Orbitty Carrier Board
-* Jetson TX2
+* Connect Tech Orbitty Carrier Board
+* Jetson™ TX2
 * Logitech C270 Webcam
 * USB2Dynamixel
 * Zig2Serial
 
 [Find a Hardware setup guide here](https://github.com/NVIDIA-Jetson/jetson-trashformers/wiki/Hardware)
 
-[Find a Linux 4 Tegra setup guide here](https://github.com/NVIDIA-Jetson/jetson-trashformers/wiki/Jetson%E2%84%A2-Flashing-and-Setup-Guide-for-a-Connect-Tech-Carrier-Board)
+[Find a Linux 4 Tegra® with Connect Tech Carrier Board setup guide here](https://github.com/NVIDIA-Jetson/jetson-trashformers/wiki/Jetson%E2%84%A2-Flashing-and-Setup-Guide-for-a-Connect-Tech-Carrier-Board)
 
 <p align="center">
   <img src="https://github.com/nvidia-jetson/jetson-trashformers/blob/master/images/our_robot.jpg" width="500">
