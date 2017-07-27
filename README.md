@@ -5,7 +5,7 @@
 ### What is this project about?
 Our project uses neural networks to train the [Robotis BioloidGP](http://en.robotis.com/index/product.php?cate_code=121510) to detect trash and throw it away in trash cans, effectively keeping the office environment clean. The current stage of the model allows for detection of white cups (as trash) in various backgrounds. The purpose of this project is to provide a use-case example for developers who may wish to use the Jetson™ platform. 
 
-**The code in this repository has only been tested on the NVIDIA Jetson™ TX2.**
+**The code in this repository has only been tested on the NVIDIA Jetson TX2.**
 
 ### How can I run this project?
 ```
@@ -14,12 +14,12 @@ cd jetson-trashformers
 make
 sh runDetect.sh
 ```
-The first three commands clone and compile the program. The last command runs a script which starts the program. **This program can only be run on the Jetson™ TX2.**
+The first three commands clone and compile the program. The last command runs a script which starts the program. **This program can only be run on the Jetson TX2.**
 
 When runDetect.sh is run, the robot's webcam is activated and begins searching for a cup. If no cup is found, it will turn and scan around until it finds a cup. Once it has done so, it will walk towards the cup, finding its orientation, and attempt to pick it up once within range. The robot then attempts scan for a trash can symbol (noramlly on trashcans) and will drop the cup infront of the trashcan.
 
 ### What is CupNet?
-CupNet is the neural network that we have created in order to detect cups. It has been trained on images of cups in multiple colors, as well as false positives to make the model more accurate. This neural network has been created and trained on [NVIDIA DIGITS](https://developer.nvidia.com/digits) using the Caffe framework. We used the help of [Dustin Franklin's Jetson™ Inference tutorial](https://github.com/dusty-nv/jetson-inference) to learn more about using DIGITS and creating our own neural network.
+CupNet is the neural network that we have created in order to detect cups. It has been trained on images of cups in multiple colors, as well as false positives to make the model more accurate. This neural network has been created and trained on [NVIDIA DIGITS](https://developer.nvidia.com/digits) using the Caffe framework. We used the help of [Dustin Franklin's Jetson Inference tutorial](https://github.com/dusty-nv/jetson-inference) to learn more about using DIGITS and creating our own neural network.
 
 <p align="center">
   <img src="https://github.com/nvidia-jetson/jetson-trashformers/blob/master/images/model26.png" width="500">
