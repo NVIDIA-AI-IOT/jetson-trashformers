@@ -1,24 +1,24 @@
 {
     "caffe flavor": "NVIDIA",
     "caffe version": "0.15.13",
-    "creation time": "2017-07-20 12:29:38.978321",
-    "dataset_id": "20170720-122153-8bd4",
+    "creation time": "2017-07-27 12:01:43.095281",
+    "dataset_id": "20170727-115951-e872",
     "deploy file": "deploy.prototxt",
     "digits version": "5.0.0",
     "framework": "caffe",
-    "id": "20170720-122938-f73a",
+    "id": "20170727-120143-8494",
     "image dimensions": [
         480,
         640,
         3
     ],
-    "job id": "20170720-122938-f73a",
+    "job id": "20170727-120143-8494",
     "mean file": "mean.binaryproto",
     "model file": "original.prototxt",
-    "name": "MultiClass_Model11",
-    "snapshot file": "snapshot_iter_7387.caffemodel",
+    "name": "MultiClass_Model23",
+    "snapshot file": "snapshot_iter_3654.caffemodel",
     "solver file": "solver.prototxt",
-    "status": "Running",
+    "status": "Done",
     "train_val file": "train_val.prototxt",
     "username": "trashformers"
 }

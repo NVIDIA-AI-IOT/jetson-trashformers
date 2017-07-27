@@ -173,6 +173,29 @@ int DetectNetController::GetClassIDFromUnsortedBBNum(int bbNum){
     return (int)confCPU[bbNum*2+1];//process to acquire class # obtained from detectnet-camera.cpp
 }
 
+DetectNetController::ClassID DetectNetController::GetClassIDFromSortedBB(int bbNum){
+    return ConvertIntToClassID((float)bbArraySorted[bbNum][4]);
+}
+
+DetectNetController::ClassID DetectNetController::ConvertIntToClassID(int int_class){
+    return static_cast<DetectNetController::ClassID>(int_class);
+/*
+    switch(int_class){
+        case UNKNOWN:
+            convertedClass = DetectNetController::ClassID::UNKNOWN;
+            break;
+        case CUP:
+            convertedClass = DetectNetController::ClassID::CUP;
+            break;
+        case TRASHCAN:
+            convertedClass = DetectNetController::ClassID::TRASHCAN;
+            break;
+        default: 
+            convertedClass = DetectNetController::ClassID::UNKNOWN; 
+    }
+ */   
+}
+
 float* DetectNetController::GetConfCPU(){
     return getConfCPU();
 }

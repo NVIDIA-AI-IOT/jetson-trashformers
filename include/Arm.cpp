@@ -83,6 +83,10 @@ void Arm::SetStorePose() {
     Set(pose_store[0], pose_store[1], pose_store[2], pose_store[3], 200);
 }
 
+void Arm::SetReleasePose() {
+    Set(pose_release[0], pose_release[1], pose_release[2], pose_release[3], 200);
+}
+
 void Arm::SetPose(ArmPose pose) {
     switch(pose) {
         default: 
@@ -100,6 +104,9 @@ void Arm::SetPose(ArmPose pose) {
             break;
         case ArmPose::STORE:
             SetStorePose();
+            break;
+        case ArmPose::RELEASE:
+            SetReleasePose();
             break;
     }
 }

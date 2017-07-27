@@ -27,6 +27,8 @@ class Humanoid {
         
         void GrabVerticalCup();
         
+        void ReleaseCup();
+        
         SerialHandler* serialHandler;
         Arm* arm;
         DetectNetController* detectnetController;
@@ -34,7 +36,9 @@ class Humanoid {
     private:
         ZigbController* zigb;
         KeyboardController* keyboardController;
-        bool grab = false;
+        bool shouldGrab = false;
+        bool searchForTrashCan = false;
+        bool release = false;
 };
 
 #endif // HUMANOID_H_

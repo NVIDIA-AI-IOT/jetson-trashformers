@@ -30,6 +30,7 @@ class Arm {
             READY,
             GRABBING, 
             GRAB,
+            RELEASE,
             STORE
         };
 
@@ -48,6 +49,7 @@ class Arm {
         int pos_shoulder, pos_elbow, pos_wrist, pos_claw;
         int pose_default[4] = {342, 572, 762, 610};   
         int pose_ready[4] = {650, 700, 350, 220};
+        int pose_release[4] = {650, 700, 350, 240};
         int pose_grabbing[4] = {650, 500, 250, 540};
         int pose_store[4] = {342, 572, 660, 540};
         
@@ -56,7 +58,7 @@ class Arm {
         void SetGrabbingPose();
         void GrabCup(); 
         void SetStorePose();
-
+        void SetReleasePose();
 };
 
 #endif //ARM_H_

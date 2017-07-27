@@ -9,10 +9,25 @@
 #include <string>
 #include "../util/detectnet-camera.h"
 
+
+#define TARGET_BB_IN_SORTED_ARRAY 0
+
 class DetectNetController {
     public:
         DetectNetController(int camPort, std::string model);
         virtual ~DetectNetController();
+
+        enum class CupOrientation {
+                VERTICAL=0,
+                HORIZONTAL=1,
+                UKNOWN=2
+        };
+
+        enum class ClassID{
+                UNKNOWN=-1,
+                CUP=0,
+                TRASHCAN=1
+        };
 
         //Structure of Unsorted Bounding Box: [x1][y1][x2][y2] (bottom left: x1, y1; top right: x2, y2)
 
@@ -47,13 +62,8 @@ class DetectNetController {
         float GetErrorXOfTargetBB();
         float GetErrorYOfTargetBB();
         int GetClassIDFromUnsortedBBNum(int bbNum);
-    
-
-        enum class CupOrientation {
-                VERTICAL=0,
-                HORIZONTAL=1,
-                UKNOWN=2
-        };
+        DetectNetController::ClassID GetClassIDFromSortedBB(int bbNum);
+        DetectNetController::ClassID ConvertIntToClassID(int int_class); 
 
         DetectNetController::CupOrientation GetCupOrientation();
 

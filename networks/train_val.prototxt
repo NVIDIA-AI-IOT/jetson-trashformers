@@ -6,7 +6,7 @@ layer {
     phase: TRAIN
   }
   data_param {
-    source: "/var/lib/digits/jobs/20170720-122153-8bd4/train_db/features"
+    source: "/var/lib/digits/jobs/20170727-115951-e872/train_db/features"
     batch_size: 10
     backend: LMDB
   }
@@ -19,7 +19,7 @@ layer {
     phase: TRAIN
   }
   data_param {
-    source: "/var/lib/digits/jobs/20170720-122153-8bd4/train_db/labels"
+    source: "/var/lib/digits/jobs/20170727-115951-e872/train_db/labels"
     batch_size: 10
     backend: LMDB
   }
@@ -32,7 +32,7 @@ layer {
     phase: TEST
   }
   data_param {
-    source: "/var/lib/digits/jobs/20170720-122153-8bd4/val_db/features"
+    source: "/var/lib/digits/jobs/20170727-115951-e872/val_db/features"
     batch_size: 6
     backend: LMDB
   }
@@ -45,7 +45,7 @@ layer {
     phase: TEST
   }
   data_param {
-    source: "/var/lib/digits/jobs/20170720-122153-8bd4/val_db/labels"
+    source: "/var/lib/digits/jobs/20170727-115951-e872/val_db/labels"
     batch_size: 6
     backend: LMDB
   }
@@ -80,10 +80,6 @@ layer {
     object_class {
       src: 2
       dst: 1
-    }
-    object_class {
-      src: 3
-      dst: 2
     }
   }
   detectnet_augmentation_param {
@@ -132,10 +128,6 @@ layer {
     object_class {
       src: 2
       dst: 1
-    }
-    object_class {
-      src: 3
-      dst: 2
     }
   }
 }
@@ -2322,7 +2314,7 @@ layer {
     decay_mult: 0.0
   }
   convolution_param {
-    num_output: 3
+    num_output: 2
     kernel_size: 1
     weight_filler {
       type: "xavier"
@@ -2418,14 +2410,13 @@ layer {
   bottom: "bboxes"
   top: "bbox-list-class0"
   top: "bbox-list-class1"
-  top: "bbox-list-class2"
   include {
     phase: TEST
   }
   python_param {
     module: "caffe.layers.detectnet.clustering"
     layer: "ClusterDetections"
-    param_str: "640, 480, 16, 0.6, 3, 0.02, 22, 3"
+    param_str: "640, 480, 16, 0.6, 3, 0.02, 22, 2"
   }
 }
 layer {
@@ -2435,14 +2426,13 @@ layer {
   bottom: "bbox-label"
   top: "bbox-list-label-class0"
   top: "bbox-list-label-class1"
-  top: "bbox-list-label-class2"
   include {
     phase: TEST
   }
   python_param {
     module: "caffe.layers.detectnet.clustering"
     layer: "ClusterGroundtruth"
-    param_str: "640, 480, 16, 3"
+    param_str: "640, 480, 16, 2"
   }
 }
 layer {
@@ -2496,36 +2486,6 @@ layer {
   top: "mAP-class1"
   top: "precision-class1"
   top: "recall-class1"
-  include {
-    phase: TEST
-  }
-  python_param {
-    module: "caffe.layers.detectnet.mean_ap"
-    layer: "mAP"
-    param_str: "640, 480, 16"
-  }
-}
-layer {
-  name: "score-class2"
-  type: "Python"
-  bottom: "bbox-list-label-class2"
-  bottom: "bbox-list-class2"
-  top: "bbox-list-scored-class2"
-  include {
-    phase: TEST
-  }
-  python_param {
-    module: "caffe.layers.detectnet.mean_ap"
-    layer: "ScoreDetections"
-  }
-}
-layer {
-  name: "mAP-class2"
-  type: "Python"
-  bottom: "bbox-list-scored-class2"
-  top: "mAP-class2"
-  top: "precision-class2"
-  top: "recall-class2"
   include {
     phase: TEST
   }

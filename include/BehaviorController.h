@@ -19,7 +19,11 @@ class BehaviorController {
             DIAGONAL_RIGHT,
             DIAGONAL_LEFT, 
             BEND_DOWN,
-            STOP
+            STOP,
+            DIAGONAL_DORSAL_LEFT,
+            DIAGONAL_DORSAL_RIGHT,
+            DIAGONAL_FRONTAL_LEFT,
+            DIAGONAL_FRONTAL_RIGHT
 
         };
 
