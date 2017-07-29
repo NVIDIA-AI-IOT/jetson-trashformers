@@ -78,6 +78,19 @@ std::array<float, 5> DetectNetController::GetTargetBB(){
     else return std::array<float, 5>();
 }
 
+//assumes array has been sorted
+std::array<float, 5> DetectNetController::GetTargetBB(DetectNetController::ClassID classID){
+    std::vector< std::array<float, 5> > sortedArray = bbArraySorted;
+    std::array<float, 5> emptySet;
+    emptySet.fill(-1);
+    if(sortedArray.size() == 0) return emptySet;
+    for(int i=0; i<(int)sortedArray.size(); i++) {
+        if(ConvertIntToClassID((int)(sortedArray[i][4])) == classID)
+            return sortedArray[i]; 
+    }
+    return emptySet;
+}
+
 float DetectNetController::GetAreaOfTargetBB(){
     if(bbArraySorted.size() < 1) return -1;
     std::array<float, 5> bb = bbArraySorted[0];
@@ -128,12 +141,15 @@ float DetectNetController::GetCenterYFromBB(std::array<float, 5> bb) {
     else return -1;
 }
 
-float DetectNetController::GetErrorXOfTargetBB() {
-   const float offset = (1.0/4.0) * (GetCameraWidth());
+float DetectNetController::GetErrorXOfTargetBB(float offset) {
    if(bbArraySorted.size() < 1) return 0.0;
    float cX = GetCenterXFromBB(bbArraySorted[0]);
    if(cX == -1) return 0.0;
    return cX - GetCameraCenterX() - offset; 
+}
+
+float DetectNetController::GetErrorXOfTargetBB(){
+    return GetErrorXOfTargetBB(0.0);
 }
 
 float DetectNetController::GetErrorYOfTargetBB() {

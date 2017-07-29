@@ -28,12 +28,15 @@ int main (int argc, char** argv){
             break;
     }
     
+    //Init Humanoid
     Humanoid* humanoid = new Humanoid(camPort, modelNum);
 
     //Send STOP command to init zigbeecontroller
     humanoid->behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
     
+    //Set arm to default pose
     humanoid->arm->SetPose(Arm::ArmPose::DEFAULT);
+
     //do nothing until detectNet is ready
     while(!humanoid->detectnetController->IsDetectNetReady()) {
         if(humanoid->detectnetController->ReadStopSignal()){
@@ -41,17 +44,15 @@ int main (int argc, char** argv){
         }
     }
 
-
+    //Read camera information from detectNet
     humanoid->detectnetController->ReadCameraResolution();
 
-    //Define acceptable distance tolerance where robot will no longer react and try to turn
-    int xReactionTolerance = 0.10 * humanoid->detectnetController->GetCameraWidth();
-    int areaTolerance = 2.00 * humanoid->detectnetController->GetCameraWidth() * humanoid->detectnetController->GetCameraHeight();
-
+    //While CTRL^C has not been pressed, run main humanoid loop
     while(!humanoid->detectnetController->ReadStopSignal()){
-        humanoid->UpdateState(xReactionTolerance, areaTolerance);
+        humanoid->UpdateState();
     }
 
+    //Merge threads and exit
     humanoid->detectnetController->JoinDetectThread();
     printf("Exiting..");
 

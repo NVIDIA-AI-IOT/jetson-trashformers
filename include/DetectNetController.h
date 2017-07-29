@@ -58,8 +58,11 @@ class DetectNetController {
         bool GetDetectNetLoopLock();
 
         std::array<float, 5> GetTargetBB();
+        std::array<float, 5> GetTargetBB(DetectNetController::ClassID classID);
+        
         float GetAreaOfTargetBB();
         float GetErrorXOfTargetBB();
+        float GetErrorXOfTargetBB(float offset);
         float GetErrorYOfTargetBB();
         int GetClassIDFromUnsortedBBNum(int bbNum);
         DetectNetController::ClassID GetClassIDFromSortedBB(int bbNum);

@@ -18,27 +18,47 @@ class Humanoid {
         Humanoid(int camPort, std::string model);
         virtual ~Humanoid();
 
+        enum class HumanoidState {
+            SEARCHING,
+            POSITIONING,
+            GRABBING,
+            RELEASING
+        };
+
         double GetCupCenterY();
         double GetCupCenterX();
 
         void UseKeyboard();
 
         void UpdateState(int xReactionTolerance, int areaTolerance);
+
+        void UpdateState();
         
         void GrabVerticalCup();
         
         void ReleaseCup();
-        
+
+        void Grab();
+
         SerialHandler* serialHandler;
         Arm* arm;
         DetectNetController* detectnetController;
         BehaviorController* behaviorController; 
+
+
+
     private:
         ZigbController* zigb;
         KeyboardController* keyboardController;
-        bool shouldGrab = false;
-        bool searchForTrashCan = false;
-        bool release = false;
+        bool lowFrame = false;
+        
+        HumanoidState humanoidState = HumanoidState::SEARCHING;
+        DetectNetController::ClassID targetClassID = DetectNetController::ClassID::CUP;  
+        bool Searching();
+        void Position();
+        void Position(float xOffset);
+        void Turn(int sleepTime);
+       
 };
 
 #endif // HUMANOID_H_
