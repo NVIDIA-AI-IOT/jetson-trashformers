@@ -31,7 +31,15 @@ int actualNumBB = 0;
 uint32_t camera_Height = 0;
 uint32_t camera_Width = 0;
 bool cameraIsLoaded = false;
-int camera_source = -1;
+int camera_source1 = -1;
+int camera_source2 = 0;
+
+//current camera
+gstCamera *camera;
+
+//cameras to be switched
+gstCamera *camera1;
+gstCamera *camera2;
 
 bool loopLock = false;
 
@@ -48,8 +56,9 @@ bool getStopSignal(){
    return signal_recieved; 
 }
 
-void setCameraPort(int source){
-    camera_source = source;
+void setCameraPorts(int default_source1, int source2){
+    camera_source1 = default_source1;
+    camera_source2 = source2;
 }
 
 bool getLoopLock(){
@@ -82,6 +91,21 @@ uint32_t getCameraHeight(){
 
 uint32_t getCameraWidth(){
     return camera_Width;
+}
+
+void switchCamera(){
+     if(!camera){
+        printf("CANNOT SWITCH CAMERA: NULL\n");
+        return;
+     }
+
+     if(camera == camera1){
+        printf("SWITCHING TO CAMERA 2\n");
+        camera = camera2;
+     } else {
+        printf("SWITCHING TO CAMERA 1\n");
+        camera = camera1;
+     }
 }
 
 int main(int argc, char** argv){
@@ -118,22 +142,29 @@ int runDetectNet( std::string modelNum )
 		printf("\ncan't catch SIGINT\n");
 
 
-	/*
-	 * create the camera device
-	 */
-	gstCamera* camera = gstCamera::Create(camera_source);
+    /* * create the second camera devices */
+	camera1 = gstCamera::Create(camera_source1);
+	camera2 = gstCamera::Create(camera_source2);
+    
+    //Set camera to default port
+    camera = camera1;
 	
-	if( !camera )
+	if( !camera1 || !camera2 )
 	{
-		printf("\ndetectnet-camera:  failed to initialize video device\n");
+		printf("\ndetectnet-camera:  failed to initialize video device(s)\n");
 		return 0;
 	}
 	
 
-	printf("\ndetectnet-camera:  successfully initialized video device\n");
-	printf("    width:  %u\n", camera->GetWidth());
-	printf("   height:  %u\n", camera->GetHeight());
-	printf("    depth:  %u (bpp)\n\n", camera->GetPixelDepth());
+	printf("\nCAM1 detectnet-camera:  successfully initialized video device\n");
+	printf("CAM1    width:  %u\n", camera1->GetWidth());
+	printf("CAM1   height:  %u\n", camera1->GetHeight());
+	printf("CAM1    depth:  %u (bpp)\n\n", camera1->GetPixelDepth());
+
+	printf("\nCAM2 detectnet-camera:  successfully initialized video device\n");
+	printf("CAM2    width:  %u\n", camera2->GetWidth());
+	printf("CAM2   height:  %u\n", camera2->GetHeight());
+	printf("CAM2    depth:  %u (bpp)\n\n", camera2->GetPixelDepth());
 	
     std::string network = "networks/snapshot_iter_" + modelNum + ".caffemodel"; 
 	/*
@@ -184,7 +215,6 @@ int runDetectNet( std::string modelNum )
 			printf("detectnet-camera:  failed to create openGL texture\n");
 	}
 	
-	
 	/*
 	 * create font
 	 */
@@ -194,12 +224,20 @@ int runDetectNet( std::string modelNum )
 	/*
 	 * start streaming
 	 */
-	if( !camera->Open() )
+	if( !camera1->Open() )
 	{
-		printf("\ndetectnet-camera:  failed to open camera for streaming\n");
+		printf("\ndetectnet-camera:  failed to open camera 1 for streaming\n");
 		return 0;
 	}
-	
+    
+    
+	if( !camera2->Open() )
+	{
+		printf("\ndetectnet-camera:  failed to open camera 2 for streaming\n");
+		return 0;
+	}
+    
+
 	printf("\ndetectnet-camera:  camera open for streaming\n");
 	
     //ADDED CAMERA FOR FUNCTIONS --MICHAEL
@@ -211,7 +249,7 @@ int runDetectNet( std::string modelNum )
 	 * processing loop
 	 */
 	float confidence = 0.0f;
-	
+
 	while( !signal_recieved )
 	{
         while(!signal_recieved && !loopLock){   
@@ -227,7 +265,7 @@ int runDetectNet( std::string modelNum )
 		// convert from YUV to RGBA
 		void* imgRGBA = NULL;
 		
-		if( !camera->ConvertRGBA(imgCUDA, &imgRGBA) )
+		if( !camera2->ConvertRGBA(imgCUDA, &imgRGBA) )
 			printf("detectnet-camera:  failed to convert from NV12 to RGBA\n");
 
 		// classify image with detectNet
@@ -312,6 +350,7 @@ int runDetectNet( std::string modelNum )
     
 			display->EndRender();
 		}
+
        loopLock = false;
 	}
 	

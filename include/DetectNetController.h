@@ -14,7 +14,9 @@
 
 class DetectNetController {
     public:
-        DetectNetController(int camPort, std::string model);
+        DetectNetController(int defaultCamPort1, 
+                                                 int camPort2, 
+                                                 std::string model);
         virtual ~DetectNetController();
 
         enum class CupOrientation {
@@ -43,11 +45,15 @@ class DetectNetController {
         float** ReadUnsortedBBArray();
         volatile int* ReadNumberOfDetectedBB();
         bool ReadStopSignal();
+    
+        void SwitchCameras();
 
         float GetCenterXFromBB(std::array<float, 5> bb);
         float GetCenterYFromBB(std::array<float, 5> bb);
         bool IsDetectNetReady();
-        void SetCameraPort(int source);
+        
+        //first parameter is the default camera to start with
+        void SetCameraPorts(int bottom_source, int top_source);
 
         float GetCameraWidth();
         float GetCameraHeight();

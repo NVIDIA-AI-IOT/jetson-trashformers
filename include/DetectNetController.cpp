@@ -1,10 +1,12 @@
 #include "DetectNetController.h"
 
-DetectNetController::DetectNetController(int camPort, std::string model){
+DetectNetController::DetectNetController(int defaultCamPort1, 
+                                         int camPort2, 
+                                         std::string model){
     //Run the DetectNet Program
     m_model = model;
     
-    SetCameraPort(camPort);
+    SetCameraPorts(defaultCamPort1, camPort2);
     detectNetThread = new std::thread(&DetectNetController::runThread, this);
 }
 
@@ -163,9 +165,13 @@ bool DetectNetController::IsDetectNetReady(){
     return isCameraLoaded();
 }
 
-void DetectNetController::SetCameraPort(int usbSource){
+void DetectNetController::SetCameraPorts(int bottom_source, int top_source){
     //command to read video devices: ls -ltrh /dev/video*
-    setCameraPort(usbSource);
+    setCameraPorts(bottom_source, top_source);
+}
+
+void DetectNetController::SwitchCameras(){
+    switchCamera();
 }
 
 float DetectNetController::GetCameraWidth(){

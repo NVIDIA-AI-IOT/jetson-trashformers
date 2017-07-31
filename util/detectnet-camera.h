@@ -15,10 +15,12 @@ float* getConfCPU();
 bool getLoopLock();
 void setLoopLock(bool lockState);
 
+void switchCamera();
+
 uint32_t getCameraHeight();
 uint32_t getCameraWidth();
 bool isCameraLoaded();
-void setCameraPort(int source);
+void setCameraPorts(int default_source1, int source2);
 
 
 

@@ -15,7 +15,7 @@
 
 class Humanoid {
     public:
-        Humanoid(int camPort, std::string model);
+        Humanoid(int bottomCamPort, int topCamPort, std::string model); 
         virtual ~Humanoid();
 
         enum class HumanoidState {
