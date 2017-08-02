@@ -123,7 +123,7 @@ void Humanoid::Position(float xOffset){
     printf("AREA TOLERANCE: %f", areaTolerance);
 
     if(detectnetController->ConvertIntToClassID(detectnetController->GetTargetBB(targetClassID)[4]) == DetectNetController::ClassID::UNKNOWN){ //NO BB IS FOUND
-       /* if(detectnetController->IsCurrentCamBottomCam() && lowFrame && targetClassID == DetectNetController::ClassID::TRASHCAN) { //class ID of trashcan
+        /* if(detectnetController->IsCurrentCamBottomCam() && lowFrame && targetClassID == DetectNetController::ClassID::TRASHCAN) { //class ID of trashcan
             humanoidState = HumanoidState::RELEASING;
             lowFrame = false;
         } else*/ if(detectnetController->IsCurrentCamBottomCam() && lowFrame && (targetClassID == DetectNetController::ClassID::CUP)) {
@@ -138,7 +138,7 @@ void Humanoid::Position(float xOffset){
             sleep(1);
             humanoidState = HumanoidState::SEARCHING;
             return;
-        } else if(!detectnetController->IsCurrentCamBottomCam() && lowFrame && (targetClassID == DetectNetController::ClassID::TRASHCAN)){
+        } else if(lowFrame && (targetClassID == DetectNetController::ClassID::TRASHCAN)){
             printf("TOP CAM LOW FRAME TRIGGERED -- RELEASING\n");
             humanoidState = HumanoidState::RELEASING;
             lowFrame = false;
