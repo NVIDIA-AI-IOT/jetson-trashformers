@@ -99,6 +99,19 @@ float DetectNetController::GetAreaOfTargetBB(){
     return (bb[2]-bb[0]) * (bb[3]-bb[1]);
 }
 
+float DetectNetController::GetAreaOfTargetBB(DetectNetController::ClassID classID){
+    std::vector< std::array<float, 5> > sortedArray = bbArraySorted;
+    std::array<float, 5> bbSet;
+    if(sortedArray.size() == 0) return -1;
+    for(int i=0; i<(int)sortedArray.size(); i++) {
+        if(ConvertIntToClassID((int)(sortedArray[i][4])) == classID){
+            bbSet = sortedArray[i];        
+            return (bbSet[2]-bbSet[0]) * (bbSet[3]-bbSet[1]);
+        }
+    }
+    return -1;
+}
+
 float DetectNetController::GetDistanceFromTwoPoints(float x1, float y1, float x2, float y2) {
     return sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
 }
@@ -172,6 +185,10 @@ void DetectNetController::SetCameraPorts(int bottom_source, int top_source){
 
 void DetectNetController::SwitchCameras(){
     switchCamera();
+}
+
+bool DetectNetController::IsCurrentCamBottomCam(){
+    return isCurrentCamBottomCam();
 }
 
 float DetectNetController::GetCameraWidth(){

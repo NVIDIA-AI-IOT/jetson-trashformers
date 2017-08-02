@@ -54,6 +54,7 @@ class DetectNetController {
         
         //first parameter is the default camera to start with
         void SetCameraPorts(int bottom_source, int top_source);
+        bool IsCurrentCamBottomCam();
 
         float GetCameraWidth();
         float GetCameraHeight();
@@ -67,6 +68,7 @@ class DetectNetController {
         std::array<float, 5> GetTargetBB(DetectNetController::ClassID classID);
         
         float GetAreaOfTargetBB();
+        float GetAreaOfTargetBB(DetectNetController::ClassID classID);
         float GetErrorXOfTargetBB();
         float GetErrorXOfTargetBB(float offset);
         float GetErrorYOfTargetBB();

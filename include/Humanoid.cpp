@@ -24,13 +24,18 @@ void Humanoid::UseKeyboard(){
 
 void Humanoid::UpdateState() {
     
+    if(shouldSwitchCams){
+        detectnetController->SwitchCameras();
+        sleep(2);
+    }
+    
     //Tell detectNet to read one image
     detectnetController->SetDetectNetLoopLock(true);
     while(detectnetController->GetDetectNetLoopLock()){}
-    
     //SortArray
     detectnetController->SortBBArrayByTargetDistance();
 
+    areaTolerance = 0.6 * detectnetController->GetCameraWidth() * detectnetController->GetCameraHeight();
     switch(humanoidState) {
         default:
         case Humanoid::HumanoidState::SEARCHING:
@@ -41,6 +46,17 @@ void Humanoid::UpdateState() {
             break;
         case Humanoid::HumanoidState::POSITIONING:
             printf("STATE: POSITIONING\n");
+           /* if(!detectnetController->IsCurrentCamBottomCam() && lowFrame) {
+                lowFrame = false;
+                detectnetController->SwitchCameras();
+                printf("SWITCHING TO BOTTOM BC OF LOWFRAME IN SWITCH\n");
+                //humanoidState = HumanoidState::SEARCHING;
+            }*/
+            if(!(detectnetController->IsCurrentCamBottomCam())){
+                Position();
+                break;
+            }            
+
             if(targetClassID == DetectNetController::ClassID::CUP){
                 Position((1.0/4.0) * detectnetController->GetCameraWidth());
             } else if(targetClassID == DetectNetController::ClassID::TRASHCAN){
@@ -56,9 +72,8 @@ void Humanoid::UpdateState() {
             ReleaseCup();
             break;
     }
-
+        printf("LOW FRAME: %i\n", lowFrame);
 }
-
 
 void Humanoid::Grab() {
     behaviorController->ChangeState(BehaviorController::ControllerState::DIAGONAL_LEFT);
@@ -103,15 +118,31 @@ void Humanoid::Position(){
 void Humanoid::Position(float xOffset){
     float xReactionTolerance = 0.10 * detectnetController->GetCameraWidth(); 
     float xError = detectnetController->GetErrorXOfTargetBB(xOffset);
+    float bbArea = detectnetController->GetAreaOfTargetBB(targetClassID);
+    printf("BBAREA: %f", bbArea);
+    printf("AREA TOLERANCE: %f", areaTolerance);
 
     if(detectnetController->ConvertIntToClassID(detectnetController->GetTargetBB(targetClassID)[4]) == DetectNetController::ClassID::UNKNOWN){ //NO BB IS FOUND
-        if(lowFrame && targetClassID == DetectNetController::ClassID::TRASHCAN) { //class ID of trashcan
+       /* if(detectnetController->IsCurrentCamBottomCam() && lowFrame && targetClassID == DetectNetController::ClassID::TRASHCAN) { //class ID of trashcan
             humanoidState = HumanoidState::RELEASING;
             lowFrame = false;
-        } else if(lowFrame && targetClassID == DetectNetController::ClassID::CUP) {
+        } else*/ if(detectnetController->IsCurrentCamBottomCam() && lowFrame && (targetClassID == DetectNetController::ClassID::CUP)) {
             humanoidState = HumanoidState::GRABBING;
             lowFrame = false;
-        } 
+        } else if(!detectnetController->IsCurrentCamBottomCam() && lowFrame && (targetClassID == DetectNetController::ClassID::CUP)){
+            lowFrame = false;
+            printf("LOW FRAME TRIGGERED IN TOP CAM\n");
+            behaviorController->ChangeState(BehaviorController::ControllerState::DIAGONAL_LEFT);
+            behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
+            printf("WALKING FORWARD BECUASE LOW FRAME IN TOP CAM\n");
+            sleep(1);
+            humanoidState = HumanoidState::SEARCHING;
+            return;
+        } else if(!detectnetController->IsCurrentCamBottomCam() && lowFrame && (targetClassID == DetectNetController::ClassID::TRASHCAN)){
+            printf("TOP CAM LOW FRAME TRIGGERED -- RELEASING\n");
+            humanoidState = HumanoidState::RELEASING;
+            lowFrame = false;
+        }
         else {
             humanoidState = HumanoidState::SEARCHING;
             lowFrame = false;
@@ -122,11 +153,20 @@ void Humanoid::Position(float xOffset){
     } else if(xError <= (xReactionTolerance)*-1.0){
         printf("TURNING LEFT\n");
         behaviorController->ChangeState(BehaviorController::ControllerState::STRAFE_LEFT);
+        if(!detectnetController->IsCurrentCamBottomCam()){
+            sleep(1);
+            behaviorController->ChangeState(BehaviorController::ControllerState::DIAGONAL_DORSAL_LEFT);
+            behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
+        }
+    } else if(bbArea > areaTolerance){
+        printf("RELEASE DUE TO LARGE AREA\n");
+        behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
+        humanoidState = HumanoidState::RELEASING;
     } else {
         printf("WALKING FORWARD\n");
         behaviorController->ChangeState(BehaviorController::ControllerState::DIAGONAL_LEFT);
         behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
-    } 
+    }
 
     if(detectnetController->ConvertIntToClassID(detectnetController->GetTargetBB(targetClassID)[4]) == DetectNetController::ClassID::UNKNOWN){
         //Don't change variables
@@ -138,8 +178,7 @@ void Humanoid::Position(float xOffset){
         lowFrame = false; 
     }
     
-    sleep(1);
-    
+    sleep(2);
 }
 
 void Humanoid::Turn(int sleepTime){
@@ -152,11 +191,27 @@ void Humanoid::Turn(int sleepTime){
 }
         
 bool Humanoid::Searching() {
-    Turn(1);
 
-    if(detectnetController->ConvertIntToClassID(detectnetController->GetTargetBB(targetClassID)[4]) == DetectNetController::ClassID::UNKNOWN){
-       return false; 
-    } else {
-       return true;
+    printf("SHOULDSWITCHCAMS: %i\n", shouldSwitchCams);
+    printf("IS BOTTOM CAMERA: %i\n", detectnetController->IsCurrentCamBottomCam());
+    if(shouldSwitchCams && !detectnetController->IsCurrentCamBottomCam()){
+        printf("TURNING!\n"); 
+        Turn(1);
     }
+    shouldSwitchCams = false;
+
+    bool found;
+    if(detectnetController->ConvertIntToClassID(detectnetController->GetTargetBB(targetClassID)[4]) == DetectNetController::ClassID::UNKNOWN){
+       found = false;
+       shouldSwitchCams = true;
+    } else {
+       found = true;
+       shouldSwitchCams = false;
+    }
+
+    printf("CAM X: %f\n", detectnetController->GetCenterXFromBB(detectnetController->GetTargetBB(targetClassID)));
+    printf("CAM Y: %f\n", detectnetController->GetCenterYFromBB(detectnetController->GetTargetBB(targetClassID)));
+    //printf("IS BOTTOM CAMERA: %i\n", detectnetController->IsCurrentCamBottomCam());
+
+    return found;
 }

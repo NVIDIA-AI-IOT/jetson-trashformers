@@ -51,6 +51,8 @@ class Humanoid {
         ZigbController* zigb;
         KeyboardController* keyboardController;
         bool lowFrame = false;
+        float areaTolerance = 0;
+        bool shouldSwitchCams = false;
         
         HumanoidState humanoidState = HumanoidState::SEARCHING;
         DetectNetController::ClassID targetClassID = DetectNetController::ClassID::CUP;  

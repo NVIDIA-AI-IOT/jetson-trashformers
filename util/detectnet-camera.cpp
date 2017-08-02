@@ -108,6 +108,15 @@ void switchCamera(){
      }
 }
 
+bool isCurrentCamBottomCam(){
+    if(!camera){
+        printf("NO CAMERA PORT: NULL\n");
+        return false;
+    }
+
+    return camera != camera1;
+}
+
 int main(int argc, char** argv){
     //runDetectNet(argc);
 }

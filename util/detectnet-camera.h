@@ -22,6 +22,7 @@ uint32_t getCameraWidth();
 bool isCameraLoaded();
 void setCameraPorts(int default_source1, int source2);
 
+bool isCurrentCamBottomCam();
 
 
 
