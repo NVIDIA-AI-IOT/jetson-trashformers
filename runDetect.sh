@@ -9,4 +9,4 @@ DISPLAY=:0
 NET=networks
 
 #run main with detectnet params
-./main 0 8967
+./main 1 8967

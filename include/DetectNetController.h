@@ -54,6 +54,7 @@ class DetectNetController {
         
         //first parameter is the default camera to start with
         void SetCameraPorts(int bottom_source, int top_source);
+        bool IsCurrentCamBottomCam();
 
         float GetCameraWidth();
         float GetCameraHeight();

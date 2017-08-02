@@ -174,6 +174,10 @@ void DetectNetController::SwitchCameras(){
     switchCamera();
 }
 
+bool DetectNetController::IsCurrentCamBottomCam(){
+    return isCurrentCamBottomCam();
+}
+
 float DetectNetController::GetCameraWidth(){
     return cameraWidth;
 }
