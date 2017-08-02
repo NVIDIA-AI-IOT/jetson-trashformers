@@ -50,7 +50,7 @@ void Arm::SetWrist(int pos, int vel){
     pos = pos < WRIST_MIN ? WRIST_MIN : pos;
     wrist->SetVelocitySetpoint(vel);
     wrist->SetPositionSetpoint(pos);
-    pos_elbow = pos;
+    pos_wrist = pos;
 }
 
 void Arm::SetClaw(int pos, int vel){
