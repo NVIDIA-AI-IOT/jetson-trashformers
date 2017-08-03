@@ -101,9 +101,16 @@ void Humanoid::ReleaseCup() {
     arm->SetPose(Arm::ArmPose::RELEASE);
     sleep(1);
     arm->SetPose(Arm::ArmPose::DEFAULT);
-    sleep(1);
+    sleep(1); 
     
-    for(int i=0; i < 4; i++) {
+    behaviorController->ChangeState(BehaviorController::ControllerState::WALK_BACKWARD);
+    behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
+    sleep(1); 
+    behaviorController->ChangeState(BehaviorController::ControllerState::WALK_BACKWARD);
+    behaviorController->ChangeState(BehaviorController::ControllerState::STOP);
+    sleep(1);
+   
+     for(int i=0; i < 4; i++) {
         Turn(1);
     }
 
