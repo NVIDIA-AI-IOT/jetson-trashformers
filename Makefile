@@ -8,16 +8,21 @@ LDFLAGS		= $(LIBDIRS) -ldetectnet-camera -ljetson-inference -lcudart -lzgb -ldxl
 
 CC			= g++
 
+.PHONY: default all dep
+
+all: dep default
+default: $(TARGET)
+
+
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
-	
 .c.o:
 	$(CC) -c $< $(CFLAGS)
 	
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(TARGET)
 	@echo "file deleted."
 
 dep:
-	gccmakedep $(SRCS)
+	./getDependencies
 

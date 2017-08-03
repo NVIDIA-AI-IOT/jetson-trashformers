@@ -6,7 +6,6 @@
 #include <string.h>
 
 #include "../util/zigbee.h"
-#include "../util/zgb_hal.h"
 
 class ZigbController {
     public:

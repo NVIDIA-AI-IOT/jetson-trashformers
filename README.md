@@ -57,8 +57,8 @@ See 'lib' folder for the specific files.
   * A shared object library for the [Dynamixel servos](https://github.com/ROBOTIS-GIT/DynamixelSDK).
 * libjetson-inference.so
   * A shared object library of [Dustin's jetson-inference](https://github.com/dusty-nv/jetson-inference).
-* libzgb.so
-  * A shared object library to control robot commands via [ZigBee](http://support.robotis.com/en/software/zigbee_sdk/zig2serial/linux.htm). 
+* libzgb.a
+  * A shared object library to control robot commands via [ZigBee](http://support.robotis.com/en/software/zigbee_sdk/zig2serial/linux.htm). (This library is downloaded as a dependancy from the ROBOTIS website)
 
 <p align="center">
   <img src="https://github.com/nvidia-jetson/jetson-trashformers/blob/master/images/teampic.jpg" width="500">

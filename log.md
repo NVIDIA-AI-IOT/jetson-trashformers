@@ -14,6 +14,7 @@ g++ -shared -o libdetectnet-camera.so detectnet-camera.cpp.o
 9. make sure Makefile includes this new library
 
 next, we need to include the cuda library files (/usr/local/cuda/lib64) to our makefile:
+example:
 ```
 LIBDIRS     += -Llib -L/usr/local/cuda/lib64
 LDFLAGS     = $(LIBDIRS) -ldetectnet-camera -ljetson-inference -lcudart -lzgb -ldxl_sbc_cpp

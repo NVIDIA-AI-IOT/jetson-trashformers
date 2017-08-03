@@ -1,3 +1,5 @@
 *.o
 *.swp
 main
+lib/libzgb.a
+util/zigbee.h
