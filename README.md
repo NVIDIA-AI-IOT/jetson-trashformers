@@ -3,7 +3,7 @@
 </p>
 
 ### What is this project about?
-Our project uses neural networks to train the [Robotis BioloidGP](http://en.robotis.com/index/product.php?cate_code=121510) to detect trash and throw it away in trash cans, effectively keeping the office environment clean. The current stage of the model allows for detection of white cups (as trash) in various backgrounds. The purpose of this project is to provide a use-case example for developers who may wish to use the Jetson™ platform. 
+Our project uses neural networks to train the [Robotis BioloidGP](http://en.robotis.com/index/product.php?cate_code=121510) to detect trash and throw it away in trash cans, effectively keeping the office environment clean. The current stage of the model allows for detection of white cups (as trash) in various backgrounds, as well as trashcan symbols. The purpose of this project is to provide a use-case example for developers who may wish to use the Jetson™ platform. 
 
 **The code in this repository has only been tested on the NVIDIA Jetson TX2.**
 
@@ -16,16 +16,16 @@ sh runDetect.sh
 ```
 The first three commands clone and compile the program. The last command runs a script which starts the program. **This program can only be run on the Jetson TX2.**
 
-When runDetect.sh is run, the robot's webcam is activated and begins searching for a cup. If no cup is found, it will turn and scan around until it finds a cup. Once it has done so, it will walk towards the cup, finding its orientation, and attempt to pick it up once within range. The robot then attempts scan for a trash can symbol (noramlly on trashcans) and will drop the cup infront of the trashcan.
+When runDetect.sh is run, the robot's webcam is activated and begins searching for a cup. If no cup is found, it will turn and scan around until it finds a cup. Once it has done so, it will walk towards the cup, find its orientation, and attempt to pick it up once within range. The robot then scans for a trashcan symbol and will drop the cup in the trashcan (altered to account for the robot's size).
 
-### What is CupNet?
-CupNet is the neural network that we have created in order to detect cups. It has been trained on images of cups in multiple colors, as well as false positives to make the model more accurate. This neural network has been created and trained on [NVIDIA DIGITS](https://developer.nvidia.com/digits) using the Caffe framework. We used the help of [Dustin Franklin's Jetson Inference tutorial](https://github.com/dusty-nv/jetson-inference) to learn more about using DIGITS and creating our own neural network.
+### What is TrashNet?
+TrashNet is the neural network that we have created in order to detect cups and trashcans. First, a network named CupNet was created with images of only cups and false positives in order to teach the robot about cups. Once a well-defined model was achieved, we added images of trashcans to teach the robot to detect those, while building off its previous knowledge about cups. This neural network has been created and trained on [NVIDIA DIGITS](https://developer.nvidia.com/digits) using the Caffe framework. We used the help of [Dustin Franklin's Jetson Inference tutorial](https://github.com/dusty-nv/jetson-inference) to learn more about using DIGITS and creating our own neural network. To learn more about [single and multi-class detection](https://github.com/NVIDIA-Jetson/jetson-trashformers/wiki/Single-and-Multi-Class-Object-Detection) and creating networks with custom data, visit our [wiki](https://github.com/NVIDIA-Jetson/jetson-trashformers/wiki).
 
 <p align="center">
-  <img src="https://github.com/nvidia-jetson/jetson-trashformers/blob/master/images/model26.png" width="500">
+  <img src="https://github.com/NVIDIA-Jetson/jetson-trashformers/blob/master/images/multi-class.png" width="500">
 </p>
 
-> This graph shows the model's statistics during the training period.
+> This graph shows the multi-class model's statistics during the training period.
 
 <p align="center">
   <img src="https://github.com/nvidia-jetson/jetson-trashformers/blob/master/images/cup_tweet.png" width="500">
@@ -41,9 +41,9 @@ CupNet is the neural network that we have created in order to detect cups. It ha
 * USB2Dynamixel
 * Zig2Serial
 
-[Find a Hardware setup guide here](https://github.com/NVIDIA-Jetson/jetson-trashformers/wiki/Hardware)
+[Find a Hardware setup guide here.](https://github.com/NVIDIA-Jetson/jetson-trashformers/wiki/Hardware)
 
-[Find a Linux 4 Tegra® with Connect Tech Carrier Board setup guide here](https://github.com/NVIDIA-Jetson/jetson-trashformers/wiki/Jetson%E2%84%A2-Flashing-and-Setup-Guide-for-a-Connect-Tech-Carrier-Board)
+[Find a Linux 4 Tegra® with Connect Tech Carrier Board setup guide here.](https://github.com/NVIDIA-Jetson/jetson-trashformers/wiki/Jetson%E2%84%A2-Flashing-and-Setup-Guide-for-a-Connect-Tech-Carrier-Board)
 
 <p align="center">
   <img src="https://github.com/nvidia-jetson/jetson-trashformers/blob/master/images/our_robot.jpg" width="500">
