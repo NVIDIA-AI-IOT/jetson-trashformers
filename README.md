@@ -18,6 +18,9 @@ The first three commands clone and compile the program. The last command runs a 
 
 When runDetect.sh is run, the robot's webcam is activated and begins searching for a cup. If no cup is found, it will turn and scan around until it finds a cup. Once it has done so, it will walk towards the cup, find its orientation, and attempt to pick it up once within range. The robot then scans for a trashcan symbol and will drop the cup in the trashcan (altered to account for the robot's size).
 
+[Watch a demo of the runDetect.sh command](https://youtu.be/JFIittmVxDc)
+
+
 ### What is TrashNet?
 TrashNet is the neural network that we have created in order to detect cups and trashcans. First, a network named CupNet was created with images of only cups and false positives in order to teach the robot about cups. Once a well-defined model was achieved, we added images of trashcans to teach the robot to detect those, while building off its previous knowledge about cups. This neural network has been created and trained on [NVIDIA DIGITS](https://developer.nvidia.com/digits) using the Caffe framework. We used the help of [Dustin Franklin's Jetson Inference tutorial](https://github.com/dusty-nv/jetson-inference) to learn more about using DIGITS and creating our own neural network. To learn more about [single and multi-class detection](https://github.com/NVIDIA-Jetson/jetson-trashformers/wiki/Single-and-Multi-Class-Object-Detection) and creating networks with custom data, visit our [wiki](https://github.com/NVIDIA-Jetson/jetson-trashformers/wiki).
 
